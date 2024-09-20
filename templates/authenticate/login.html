@@ -8,24 +8,13 @@
 
     <!-- Background image -->
 
-    <!-- Login Form -->
-    <div class="relative z-10 bg-black bg-opacity-80 p-10 rounded-lg shadow-lg">
-        <h2 class="text-center text-3xl text-white font-bold mb-6">Login</h2>
+<div class="col-md-6 offset-md-3">
+	<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" >Log In</button>
+</form>
 
-        <div class="w-full">
-            <form method="POST">
-                {% csrf_token %}
-                <div class="mb-4">
-                    <input type="text" class="w-full px-4 py-2 text-lg text-black placeholder-gray-400 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Enter Username" name="username">
-                </div>
-                <div class="mb-4">
-                    <input type="password" class="w-full px-4 py-2 text-lg text-black placeholder-gray-400 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Enter Password" name="password">
-                </div>
-
-                <button type="submit" class="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded hover:bg-indigo-700">Login</button>
-            </form>
-        </div>
-    </div>
 </div>
 
 {% endblock %}

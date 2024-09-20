@@ -7,12 +7,6 @@
 <form method="post">
   {% csrf_token %}
   {{ form }}
-    <label for="account_type">Select Account Type:</label>
-    <select name="account_type" id="account_type">
-        <option value="student">Student</option>
-        <option value="educator">Educator</option>
-        <option value="admin">Admin</option>
-    </select>
   <button type="submit">Sign Up</button>
 </form>
 {% endblock %}
