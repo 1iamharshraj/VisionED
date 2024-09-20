@@ -6,4 +6,3 @@ env
 .env
 package
 package-lock
-tailwinc.config.js
