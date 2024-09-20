@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import authenticate
 
-from home.models import CustomUser
+from home.models import CustomUser, EducatorUpload
 
 # Common Tailwind CSS classes
 form_input_classes = ('mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm '
@@ -69,3 +69,34 @@ class LoginForm(forms.Form):
         if user is None:
             raise forms.ValidationError("Invalid username or password.")
         return cleaned_data
+
+
+class EducatorUploadForm(forms.ModelForm):
+    title = forms.CharField(max_length=200, widget=forms.TextInput(attrs={
+        'class': 'block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm',
+        'placeholder': 'Enter the title'
+    }))
+
+    description = forms.CharField(widget=forms.Textarea(attrs={
+        'class': 'block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm',
+        'placeholder': 'Enter a description'
+    }))
+
+    ppt_file = forms.FileField(widget=forms.ClearableFileInput(attrs={
+        'class': 'block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm',
+    }))
+
+    image = forms.ImageField(required=False, widget=forms.ClearableFileInput(attrs={
+        'class': 'block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm',
+    }))
+
+    class Meta:
+        model = EducatorUpload
+        fields = ['title', 'description', 'ppt_file', 'image']
+
+    def save(self, commit=True):
+        # Save the instance and set the educator field
+        instance = super().save(commit=False)
+        if commit:
+            instance.save()
+        return instance
