@@ -3,7 +3,8 @@ from django.shortcuts import redirect, render
 from django.views import View
 from django.views.generic import CreateView
 
-from home.forms import EducatorSignUpForm, StudentSignUpForm, AdminSignUpForm, LoginForm
+from home.forms import  LoginForm, SignUpForm
+
 
 class LoginView(View):
     def get(self, request):
@@ -49,24 +50,10 @@ class LogoutView(View):
         logout(request)
         return redirect('home')
 
-
 class SignUpView(CreateView):
-    template_name = 'users/register.html'
-    success_url = '/home/'
-
-    def get_form_class(self):
-        # Determine which form to use based on account_type in the GET parameters
-        account_type = self.request.GET.get('account_type')
-
-        if account_type == 'admin':
-            return AdminSignUpForm
-        elif account_type == 'student':
-            return StudentSignUpForm
-        elif account_type == 'educator':
-            return EducatorSignUpForm
-        else:
-            # Default or handle error if no valid account type is provided
-            return StudentSignUpForm  # Or any other default form
+    form_class = SignUpForm
+    template_name = 'users/register.html'  # You can reuse this for different account types
+    success_url = ''  # Redirect based on account type if necessary
 
     def form_valid(self, form):
         # Create the user and log them in
