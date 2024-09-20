@@ -1,0 +1,26 @@
+npm init -y
+npm install tailwindcss postcss autoprefixer
+npx tailwindcss init
+
+TO RUN - npm run build:css
+
+in tailwind.confing.js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './templates/**/*.html',
+    './**/templates/**/*.html',
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
+
+
+in package.json  
+"scripts": {
+  "build:css": "tailwindcss build static/css/tailwind.css -o static/css/style.css",
+  "watch:css": "tailwindcss build static/css/tailwind.css -o static/css/style.css --watch"
+}
