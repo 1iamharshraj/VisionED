@@ -1,0 +1,72 @@
+{% load compress %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    {% compress css %}
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    {% endcompress %}
+</head>
+<body class="bg-background text-white dark:text-white">
+
+    <!-- Navigation Bar -->
+<nav class="bg-secondary-background shadow-md dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <!-- Logo -->
+            <div class="flex items-center justify-start">
+                <img src="/static/img/logo.png" alt="Logo" class="h-10 w-auto">
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="hidden md:flex md:items-center md:space-x-8 mx-auto">
+                <a href="#" class="hover:text-secondary-ascent">Home</a>
+                <a href="#" class="border-b-2 border-secondary-ascent">Courses</a>
+                <a href="#" class="hover:text-secondary-ascent">About</a>
+                <a href="#" class="hover:text-secondary-ascent">Contact Us</a>
+            </div>
+
+            <!-- Profile Dropdown -->
+            <div class="relative flex-shrink-0">
+                <button id="profileButton" class="flex items-center hover:text-secondary-ascent">
+                    <img src="https://via.placeholder.com/30" alt="Profile" class="rounded-full">
+                    <span class="ml-2">Profile</span>
+                </button>
+                <div id="profileDropdown" class="absolute right-0 z-10 hidden bg-secondary-background shadow-lg dark:bg-gray-900 mt-2 rounded-md w-48">
+                    <a href="#" class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">My Account</a>
+                    <a href="#" class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">Settings</a>
+                    <a href="#" class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Courses Section -->
+<div class="mt-8 max-w-7xl mx-auto p-6">
+    <h1 class="text-2xl font-semibold">Introduction to C++</h1>
+        <video class="h-full w-full rounded-lg" controls>
+      <source
+        src="static/video/final_video (2).mp4"
+        type="video/mp4"
+      />
+      Your browser does not support the video tag.
+    </video>
+
+    </div>
+</div>
+
+<script>
+    document.getElementById('profileButton').onclick = function() {
+        var dropdown = document.getElementById('profileDropdown');
+        dropdown.classList.toggle('hidden');
+    };
+</script>
+</body>
+</html>
