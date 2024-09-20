@@ -12,6 +12,16 @@ from django.views import View
 from .forms import LoginForm
 from .models import EducatorUpload
 
+class EducatorCourseView(View):
+    def get(self, request):
+        return render(request,"educator/EduCourses.html")
+class StudentHomeView(View):
+    def get(self, request):
+        return render(request,"students/Stuhome.html")
+
+class StudentCourseView(View):
+    def get(self, request):
+        return render(request,"students/StuCourses.html")
 
 class LoginView(View):
     def get(self, request):
