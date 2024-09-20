@@ -6,3 +6,13 @@ env
 .env
 package
 package-lock
+*/CACHE/*
+
+
+# Build artifacts
+/build
+/dist
+/node_modules
+
+# TailwindCSS output
+static/css/output.css

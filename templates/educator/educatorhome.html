@@ -1,0 +1,12 @@
+{% extends "educator/base.html" %}
+
+{% block title %}Educator Home{% endblock %}
+
+{% block content %}
+<h2>Sign up</h2>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Upload</button>
+</form>
+{% endblock %}

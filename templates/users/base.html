@@ -21,13 +21,28 @@
   <!-- Full-screen background image -->
   <div class="absolute inset-0 bg-[url('/static/img/MAINLOGO.jpg')] bg-cover bg-center"></div>
 
+  <!-- Sticky Navigation -->
+  <nav class="fixed top-0 left-0 w-full z-20 border-b border-gray-500">
+    <div class="container mx-auto flex items-center justify-between p-4">
+      <!-- Logo -->
+      <a href="#" class="flex items-center">
+        <!-- Replace with your image or SVG logo -->
+        <img src="{% static 'img/VisionEdLOGO.svg' %}" alt="Logo" class="h-8 w-auto"> <!-- Adjust height as needed -->
+      </a>
+      <!-- Right Side (optional for adding links) -->
+      <div>
+        <!-- You can add navigation links here if needed -->
+        <a href="#" class="text-white px-4 py-2">Home</a>
+        <a href="#" class="text-white px-4 py-2">About</a>
+        <a href="#" class="text-white px-4 py-2">Contact</a>
+      </div>
+    </div>
+  </nav>
+
   <!-- Content container, positioned above the background image -->
-  <div class="relative z-10 text-white">
-    <div class="container mx-auto py-10">
+  <div class="relative z-10 text-white pt-16"> <!-- Added pt-16 to give space for the sticky nav -->
+    <div class="container py-10">
       {% block content %}
-      <!-- Future components and elements go here -->
-      <h1 class="text-5xl font-bold">Welcome to VisionEd</h1>
-      <p class="mt-4">Your content will now appear on top of the background.</p>
       {% endblock %}
     </div>
   </div>
