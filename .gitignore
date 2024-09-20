@@ -1,13 +1,15 @@
 .idea
 db.sqlite3
-*.pyc
+/*.pyc
 assets
 env
 .env
 package
 package-lock
 */CACHE/*
-
+*/__pycache__/*
+*/migrations/__pycache__/
+*/video/*
 
 # Build artifacts
 /build
