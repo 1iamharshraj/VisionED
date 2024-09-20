@@ -26,3 +26,10 @@
     font-weight:300;
     font-style:normal;
   }
+
+  .arima-500 {
+    font-family: "Arima", system-ui;
+    font-optical-sizing: auto;
+    font-weight:500;
+    font-style:normal;
+  }

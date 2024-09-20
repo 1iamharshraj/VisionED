@@ -11,17 +11,26 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <!-- Left Column: Text -->
     <div class="p-4 ml-5">
-      <p class="text-[5rem] text-text-color">Revolutionize</p>
-      <p class="text-[5rem] text-text-color">Learning</p>
-      <p classes="w-[40px] h-[40px] text-[2rem] text-text-color border">With</p>
-      <p class="text-[5rem] text-primary-ascent">AI Driven</p>
-      <p class="text-[5rem] text-text-color">Education</p>
+      <p class="text-[4rem] arima-300 text-text-color ml-10">Revolutionize</p>
+
+      <!-- Flex container to align Learning and With next to each other -->
+      <div class="flex items-center ml-7">
+        <p class="text-[4rem] arima-500 text-text-color">Learning</p>
+        <p
+          class="w-[100px] h-[100px] arima-500 flex items-center justify-center text-[2rem] border-2 border-pure-white text-pure-white rounded-[20%] ml-4">
+          With
+        </p>
+      </div>
+
+      <p class="text-[4rem] text-primary-ascent arima-500 ml-6">AI Driven</p>
+      <p class="text-[4rem] text-text-color arima-500 ml-9">Education</p>
       <p class="mb-4"></p>
     </div>
 
+
     <!-- Right Column: Sign Up Form -->
     <div
-      class="p-4 bg-background bg-opacity-50 backdrop-blur-md ml-5 min-w-[300px] min-h-[500px] flex flex-col justify-center items-center space-y-4">
+      class="p-4 bg-background bg-opacity-50 backdrop-blur-md ml-5 min-w-[250px] min-h-[500px] flex flex-col justify-center items-center space-y-4">
 
       <!-- Sign Up Heading -->
       <p class="text-primary-ascent text-[36px] arima-300">
@@ -29,16 +38,16 @@
       </p>
 
       <!-- Subtitle Text -->
-      <p class="text-secondtext-color text-[16px] arima-200 text-center">
+      <p class="text-pure-white text-[16px] arima-200 text-center">
         Begin your journey for AI-assisted learning.
       </p>
 
       <!-- Sign Up Form -->
-      <form method="post" class="bg-gray-800 text-text-color p-4 rounded-sm shadow-md w-full max-w-md">
+      <form method="post" class="bg-gray-800 text-text-color p-3 rounded-sm shadow-md w-full max-w-sm">
         {% csrf_token %}
 
         <!-- Account Type -->
-        <div class="mb-4">
+        <div class="mb-3">
           <label for="{{ form.account_type.id_for_label }}" class="block text-sm font-medium text-white">
             {{ form.account_type.label_tag }}
           </label>
@@ -49,7 +58,7 @@
         </div>
 
         <!-- First Name -->
-        <div class="mb-4">
+        <div class="mb-3">
           <label for="{{ form.first_name.id_for_label }}" class="block text-sm font-medium text-white">
             {{ form.first_name.label_tag }}
           </label>
@@ -60,7 +69,7 @@
         </div>
 
         <!-- Last Name -->
-        <div class="mb-4">
+        <div class="mb-3">
           <label for="{{ form.last_name.id_for_label }}" class="block text-sm font-medium text-white">
             {{ form.last_name.label_tag }}
           </label>
@@ -71,7 +80,7 @@
         </div>
 
         <!-- Email -->
-        <div class="mb-4">
+        <div class="mb-3">
           <label for="{{ form.email.id_for_label }}" class="block text-sm font-medium text-white">
             {{ form.email.label_tag }}
           </label>
@@ -82,7 +91,7 @@
         </div>
 
         <!-- Username -->
-        <div class="mb-4">
+        <div class="mb-3">
           <label for="{{ form.username.id_for_label }}" class="block text-sm font-medium text-white">
             {{ form.username.label_tag }}
           </label>
@@ -93,7 +102,7 @@
         </div>
 
         <!-- Password -->
-        <div class="mb-4">
+        <div class="mb-3">
           <label for="{{ form.password.id_for_label }}" class="block text-sm font-medium text-white">
             {{ form.password.label_tag }}
           </label>
@@ -104,14 +113,15 @@
         </div>
 
         <!-- Submit Button -->
-        <div class="mt-6">
+        <div class="mt-4">
           <button type="submit"
-            class="btn btn-success btn-md bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">
+            class="bg-secondary-ascent btn-lg w-full h-[40px] text-center hover:bg-primary-ascent text-pure-white arima-300 py-2 px-4 rounded">
             Sign Up
           </button>
         </div>
       </form>
     </div>
+
 
   </div>
 </section>
