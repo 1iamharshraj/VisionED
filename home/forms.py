@@ -4,11 +4,11 @@ from django.contrib.auth import authenticate
 from home.models import CustomUser, EducatorUpload
 
 form_input_classes = ('mt-1 block w-full h-[40px] px-3 py-2 border border-gray-300 rounded-md shadow-sm '
-                      'bg-input-color text-white focus:bg-black focus:text-white focus:outline-none '
+                      'bg-background text-white focus:bg-black focus:text-white focus:outline-none '
                       'focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm')
 
 form_password_classes = ('mt-1 block w-full h-[40px] px-3 py-2 border border-gray-300 rounded-md shadow-sm '
-                         'bg-input-color text-white focus:bg-black focus:text-white focus:outline-none '
+                         'bg-background text-white focus:bg-black focus:text-white focus:outline-none '
                          'focus:ring-red-500 focus:border-red-500 sm:text-sm')
 
 ACCOUNT_TYPE_CHOICES = [
@@ -75,21 +75,21 @@ class LoginForm(forms.Form):
 
 class EducatorUploadForm(forms.ModelForm):
     title = forms.CharField(max_length=200, widget=forms.TextInput(attrs={
-        'class': 'block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm',
+        'class': 'w-[90%] h-[50%] px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-background',
         'placeholder': 'Enter the title'
     }))
 
     description = forms.CharField(widget=forms.Textarea(attrs={
-        'class': 'block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm',
+        'class': 'w-[90%] h-[50%] px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-background',
         'placeholder': 'Enter a description'
     }))
 
     ppt_file = forms.FileField(widget=forms.ClearableFileInput(attrs={
-        'class': 'block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm',
+        'class': 'hidden',
     }))
 
     image = forms.ImageField(required=False, widget=forms.ClearableFileInput(attrs={
-        'class': 'block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm',
+        'class': 'hidden ',
     }))
 
     class Meta:
