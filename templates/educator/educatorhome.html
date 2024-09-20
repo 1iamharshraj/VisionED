@@ -3,10 +3,53 @@
 {% block title %}Educator Home{% endblock %}
 
 {% block content %}
-<h2>Sign up</h2>
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Upload</button>
-</form>
+<h2 class="text-3xl font-bold mb-4 arima-5 p-5 m-5">Create Course</h2>
+
+<section class="bg-secondary-background p-5 m-5 grid grid-cols-2 gap-6">
+    <!-- Form Row -->
+    <div>
+        <form method="POST" enctype="multipart/form-data" class="space-y-6">
+            {% csrf_token %}
+
+            <!-- Title Field -->
+            <div class="mb-4">
+                <label for="id_title" class="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                {{ form.title }}
+            </div>
+
+            <!-- Description Field -->
+            <div class="mb-4">
+                <label for="id_description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                {{ form.description }}
+            </div>
+
+            <!-- PPT File Field -->
+            <div class="mb-4">
+                <label for="id_ppt_file" class="block text-sm font-medium text-gray-700 mb-1">Upload PPT File</label>
+                {{ form.ppt_file }}
+            </div>
+
+            <!-- Image Field (Optional) -->
+            <div class="mb-4">
+                <label for="id_image" class="block text-sm font-medium text-gray-700 mb-1">Upload Image
+                    (Optional)</label>
+                {{ form.image }}
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Upload
+            </button>
+        </form>
+    </div>
+
+    <!-- Other Divs Row -->
+    <div>
+        <!-- Add any content for your divs here -->
+        <p class="text-gray-700">This is some additional content in the next row.</p>
+        <p class="text-gray-700">You can add more divs, images, or text here.</p>
+    </div>
+</section>
+
+
 {% endblock %}
