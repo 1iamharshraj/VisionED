@@ -13,6 +13,8 @@ module.exports = {
       'text-color': '#D9D9D9',
       'secondtext-color': '#444444',
       'secondary-ascent': '#9A8DF6',
+      'input-color': '7B7878',
+      'input-stroke': 'E0DBDB',
       'gray-dark': '#273444',
       'gray': '#8492a6',
       'gray-light': '#d3dce6',
@@ -21,7 +23,18 @@ module.exports = {
       sans: ['Graphik', 'sans-serif'],
       serif: ['Merriweather', 'serif']
     },
-    extend: {},
+    extend: {
+      fontSize: {
+        'h80': '80px',
+        'h1': '40px',
+        'h2': '36px',
+        'h3': '30px',
+        'subheading': '22px', // For sub-sections
+        'h4': '24px',
+        'h5': '20px',
+        'small': '12px', // For captions
+      }
+    }
   },
   plugins: [],
 }
