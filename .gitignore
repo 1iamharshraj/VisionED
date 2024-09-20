@@ -16,3 +16,5 @@ package-lock
 
 # TailwindCSS output
 static/css/output.css
+output.css
+
