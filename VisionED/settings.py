@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
+    'compressor'
 ]
 
 MIDDLEWARE = [
@@ -49,6 +50,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+COMPRESS_ROOT = BASE_DIR / 'static'
+ 
+COMPRESS_ENABLED = True
+ 
+STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',)
 
 ROOT_URLCONF = 'VisionED.urls'
 

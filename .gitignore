@@ -4,3 +4,5 @@ db.sqlite3
 assets
 env
 .env
+package
+package-lock
