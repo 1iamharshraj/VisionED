@@ -6,6 +6,7 @@ env
 .env
 package
 package-lock
+*/CACHE/*
 
 
 # Build artifacts

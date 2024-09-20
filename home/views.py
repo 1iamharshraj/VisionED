@@ -4,13 +4,13 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import CreateView, FormView
 
-from home.forms import  LoginForm, SignUpForm
-
+from home.forms import LoginForm, SignUpForm, EducatorUploadForm
 
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.views import View
 from .forms import LoginForm
+from .models import EducatorUpload
 
 
 class LoginView(View):
@@ -70,3 +70,22 @@ class SignUpView(CreateView):
             return redirect('/educator_home/')
         else:
             return redirect(self.success_url)
+
+
+class EducatorHomeView(CreateView):
+    model = EducatorUpload
+    form_class = EducatorUploadForm
+    template_name = 'educator/educatorhome.html'
+    success_url = '/educator_home/'
+
+    def form_valid(self, form):
+        # Set the educator field to the current user
+        form.instance.educator = self.request.user
+        form.save()  # Save the form instance
+        print(form.cleaned_data)  # Debugging line
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        # This method is called when the form is invalid
+        print(form.errors)  # Debugging line
+        return super().form_invalid(form)
