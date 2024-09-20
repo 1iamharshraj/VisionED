@@ -4,13 +4,33 @@
 
 {% block content %}
 
-<section class="mt-4">
-  <h2 class="h-3">Sign up</h2>
-  <form method="post" class="text-text-color ">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign Up</button>
-  </form>
+<nav></nav>
+
+
+<section class="mt-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <!-- Left Column: Text -->
+    <div class="p-4 ml-5">
+      <p class="text-[5rem] text-text-color">Revolutionize</p>
+      <p class="text-[5rem] text-text-color">Learning</p>
+      <p class="text-[5rem] text-primary-ascent">AI Driven</p>
+      <p class="text-[5rem] text-text-color">Education</p>
+      <p class="mb-4"></p>
+    </div>
+
+    <!-- Right Column: Sign Up Form -->
+    <div class="p-4 bg-background bg-opacity-50 backdrop-blur-md ml-5 min-w-[300px] min-h-[500px] ">
+      <form method="post" class="bg-gray-800 text-text-color p-4 rounded-sm shadow-md">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success btn-md">
+          Sign Up
+        </button>
+      </form>
+    </div>
+  </div>
 </section>
+
+
 
 {% endblock %}
