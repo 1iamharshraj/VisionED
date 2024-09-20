@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load compress %}
 <!doctype html>
 <html lang="en">
 
@@ -9,12 +9,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
+    {% compress css %}
+    <link rel="stylesheet"
+        href="{% static 'css/output.css' %}">
+    {% endcompress %}
+
 
 
   <title>Hello, world!</title>
 </head>
 
-<body>
+<body class="absolute inset-0 bg-black">
+
+    <div class="absolute inset-0 bg-[url('/static/img/MainBackground.jpg')] bg-cover bg-center"></div>
+
 
   <h1 class="text-3xl font-bold underline bg-slate-700"></h1>
   Hello world!
@@ -83,6 +91,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
     integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
     crossorigin="anonymous"></script>
+
 </body>
 
 </html>
