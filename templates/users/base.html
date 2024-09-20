@@ -1,26 +1,37 @@
-{% load compress %}
 {% load static %}
-
-<!DOCTYPE html>
+{% load compress %}
+<!doctype html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Django + Tailwind CSS</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+  <!-- Tailwind CSS -->
   {% compress css %}
   <link rel="stylesheet" href="{% static 'css/output.css' %}">
   {% endcompress %}
 
+  <title>VisionEd</title>
 </head>
 
-<body class="bg-blue-950">
-  <div class="container mx-auto mt-4">
-    {% block content %}
-    {% endblock content %}
+<body class="bg-black relative min-h-screen">
+
+  <!-- Full-screen background image -->
+  <div class="absolute inset-0 bg-[url('/static/img/MAINLOGO.jpg')] bg-cover bg-center"></div>
+
+  <!-- Content container, positioned above the background image -->
+  <div class="relative z-10 text-white">
+    <div class="container mx-auto py-10">
+      {% block content %}
+      <!-- Future components and elements go here -->
+      <h1 class="text-5xl font-bold">Welcome to VisionEd</h1>
+      <p class="mt-4">Your content will now appear on top of the background.</p>
+      {% endblock %}
+    </div>
   </div>
+
 </body>
 
 </html>
