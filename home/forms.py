@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth import authenticate
 
 from home.models import CustomUser
 
@@ -43,10 +44,28 @@ class SignUpForm(forms.ModelForm):
         return user
 
 
-class LoginForm(forms.ModelForm):
-    class Meta:
-        model = CustomUser
-        fields = ['username', 'password']
-        widgets = {
-            'password': forms.PasswordInput(),
-        }
+class LoginForm(forms.Form):
+    username = forms.CharField(
+        max_length=150,
+        widget=forms.TextInput(attrs={
+            'class': 'mt-2 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm',
+            'placeholder': 'Username',
+        })
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'class': 'mt-2 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm',
+            'placeholder': 'Password',
+        })
+    )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        username = cleaned_data.get('username')
+        password = cleaned_data.get('password')
+
+        # Authenticate the user
+        user = authenticate(username=username, password=password)
+        if user is None:
+            raise forms.ValidationError("Invalid username or password.")
+        return cleaned_data
