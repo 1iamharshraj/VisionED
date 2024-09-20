@@ -10,32 +10,7 @@
 <h2 class="h-3">Sign up</h2>
 <form method="post" class="text-text-color ">
   {% csrf_token %}
-  {{form.as_p}}
-  <!-- <div>
-    <label for="first_name">First Name</label>
-    {{ form.first_name }}
-  </div>
-
-  <div>
-    <label for="last_name">Last Name</label>
-    {{ form.last_name }}
-  </div>
-
-  <div>
-    <label for="email">Email</label>
-    {{ form.email }}
-  </div>
-
-  <div>
-    <label for="username">Upload an Image:</label>
-    {{ form.image }}
-  </div> -->
-
-  <button type="submit" class="bg-primary-ascent hover:bg-secondary-ascent text-white font-bold py-2 px-4 rounded">
-    Upload
-  </button>
-</form>
-
-<button type="submit">Sign Up</button>
+  {{ form }}
+  <button type="submit">Sign Up</button>
 </form>
 {% endblock %}
