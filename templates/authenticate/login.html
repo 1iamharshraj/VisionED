@@ -1,20 +1,18 @@
 {% extends 'authenticate/base.html' %}
 
 {% block content %}
-
 <div class="relative h-screen flex items-center justify-center">
     <!-- Black background -->
-    <div class="absolute inset-0 bg-#191919 opacity-70"></div>
+    <div class="absolute inset-0 bg-black opacity-50"></div>
 
-    <!-- Background image -->
-
-<div class="col-md-6 offset-md-3">
-	<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" >Log In</button>
-</form>
-
+    <!-- Form Container -->
+    <div class="bg-white shadow-lg rounded-lg p-6 w-full max-w-md z-10">
+        <h2 class="text-xl font-bold mb-4 text-center text-text-color">Log In</h2>
+        <form method="post" class="text-text-color">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="w-full bg-blue-600 text-white font-bold py-2 rounded-md hover:bg-blue-500">Log In</button>
+        </form>
+    </div>
 </div>
-
 {% endblock %}
