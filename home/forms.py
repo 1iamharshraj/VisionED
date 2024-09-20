@@ -3,11 +3,13 @@ from django.contrib.auth import authenticate
 
 from home.models import CustomUser, EducatorUpload
 
-# Common Tailwind CSS classes
-form_input_classes = ('mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm '
-                      'focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm')
-form_password_classes = ('mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm '
-                         'focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm')
+form_input_classes = ('mt-1 block w-full h-[40px] px-3 py-2 border border-gray-300 rounded-md shadow-sm '
+                      'bg-input-color text-white focus:bg-black focus:text-white focus:outline-none '
+                      'focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm')
+
+form_password_classes = ('mt-1 block w-full h-[40px] px-3 py-2 border border-gray-300 rounded-md shadow-sm '
+                         'bg-input-color text-white focus:bg-black focus:text-white focus:outline-none '
+                         'focus:ring-red-500 focus:border-red-500 sm:text-sm')
 
 ACCOUNT_TYPE_CHOICES = [
     ('admin', 'Admin'),

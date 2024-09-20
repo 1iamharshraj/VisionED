@@ -24,3 +24,4 @@ in package.json
   "build:css": "tailwindcss build static/css/tailwind.css -o static/css/style.css",
   "watch:css": "tailwindcss build static/css/tailwind.css -o static/css/style.css --watch"
 }
+ npx tailwindcss build -i  static/css/input.css -o static/css/output.css --watch 

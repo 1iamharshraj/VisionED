@@ -5,12 +5,12 @@
 
 <head>
   <!-- Required meta tags -->
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Arima:wght@100..700&display=swap" rel="stylesheet">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
   <!-- Tailwind CSS -->
   {% compress css %}
   <link rel="stylesheet" href="{% static 'css/output.css' %}">
@@ -25,21 +25,18 @@
   <div class="absolute inset-0 bg-[url('/static/img/MAINLOGO.jpg')] bg-cover bg-center"></div>
 
   <!-- Sticky Navigation -->
-  <nav class="fixed top-0 left-0 w-full z-20 border-b border-gray-500">
+  <nav class="fixed top-0 left-0 w-full z-20 ">
     <div class="container mx-auto flex items-center justify-between p-4">
       <!-- Logo -->
       <a href="#" class="flex items-center">
         <!-- Replace with your image or SVG logo -->
-        <img src="{% static 'img/VisionEdLOGO.png' %}" class="object-contain w-[90px] h-[90px]" alt="Logo">
+        <img src="{% static 'img/VisionEdLOGO.png' %}" class="object-contain w-[100px] h-[100px]" alt="Logo">
         <!-- Adjust height as needed -->
-        <span class="text-primary-ascent  text-[20px]">VisionEd</span>
+        <span class="text-primary-ascent  text-[20px] arima-300">VisionEd</span>
       </a>
       <!-- Right Side (optional for adding links) -->
       <div>
         <!-- You can add navigation links here if needed -->
-        <a href="#" class="text-white px-4 py-2">Home</a>
-        <a href="#" class="text-white px-4 py-2">About</a>
-        <a href="#" class="text-white px-4 py-2">Contact</a>
       </div>
     </div>
   </nav>

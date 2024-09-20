@@ -13,21 +13,106 @@
     <div class="p-4 ml-5">
       <p class="text-[5rem] text-text-color">Revolutionize</p>
       <p class="text-[5rem] text-text-color">Learning</p>
+      <p classes="w-[40px] h-[40px] text-[2rem] text-text-color border">With</p>
       <p class="text-[5rem] text-primary-ascent">AI Driven</p>
       <p class="text-[5rem] text-text-color">Education</p>
       <p class="mb-4"></p>
     </div>
 
     <!-- Right Column: Sign Up Form -->
-    <div class="p-4 bg-background bg-opacity-50 backdrop-blur-md ml-5 min-w-[300px] min-h-[500px] ">
-      <form method="post" class="bg-gray-800 text-text-color p-4 rounded-sm shadow-md">
+    <div
+      class="p-4 bg-background bg-opacity-50 backdrop-blur-md ml-5 min-w-[300px] min-h-[500px] flex flex-col justify-center items-center space-y-4">
+
+      <!-- Sign Up Heading -->
+      <p class="text-primary-ascent text-[36px] arima-300">
+        Sign Up
+      </p>
+
+      <!-- Subtitle Text -->
+      <p class="text-secondtext-color text-[16px] arima-200 text-center">
+        Begin your journey for AI-assisted learning.
+      </p>
+
+      <!-- Sign Up Form -->
+      <form method="post" class="bg-gray-800 text-text-color p-4 rounded-sm shadow-md w-full max-w-md">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-success btn-md">
-          Sign Up
-        </button>
+
+        <!-- Account Type -->
+        <div class="mb-4">
+          <label for="{{ form.account_type.id_for_label }}" class="block text-sm font-medium text-white">
+            {{ form.account_type.label_tag }}
+          </label>
+          {{ form.account_type }}
+          {% if form.account_type.errors %}
+          <p class="text-red-500 text-sm">{{ form.account_type.errors }}</p>
+          {% endif %}
+        </div>
+
+        <!-- First Name -->
+        <div class="mb-4">
+          <label for="{{ form.first_name.id_for_label }}" class="block text-sm font-medium text-white">
+            {{ form.first_name.label_tag }}
+          </label>
+          {{ form.first_name }}
+          {% if form.first_name.errors %}
+          <p class="text-red-500 text-sm">{{ form.first_name.errors }}</p>
+          {% endif %}
+        </div>
+
+        <!-- Last Name -->
+        <div class="mb-4">
+          <label for="{{ form.last_name.id_for_label }}" class="block text-sm font-medium text-white">
+            {{ form.last_name.label_tag }}
+          </label>
+          {{ form.last_name }}
+          {% if form.last_name.errors %}
+          <p class="text-red-500 text-sm">{{ form.last_name.errors }}</p>
+          {% endif %}
+        </div>
+
+        <!-- Email -->
+        <div class="mb-4">
+          <label for="{{ form.email.id_for_label }}" class="block text-sm font-medium text-white">
+            {{ form.email.label_tag }}
+          </label>
+          {{ form.email }}
+          {% if form.email.errors %}
+          <p class="text-red-500 text-sm">{{ form.email.errors }}</p>
+          {% endif %}
+        </div>
+
+        <!-- Username -->
+        <div class="mb-4">
+          <label for="{{ form.username.id_for_label }}" class="block text-sm font-medium text-white">
+            {{ form.username.label_tag }}
+          </label>
+          {{ form.username }}
+          {% if form.username.errors %}
+          <p class="text-red-500 text-sm">{{ form.username.errors }}</p>
+          {% endif %}
+        </div>
+
+        <!-- Password -->
+        <div class="mb-4">
+          <label for="{{ form.password.id_for_label }}" class="block text-sm font-medium text-white">
+            {{ form.password.label_tag }}
+          </label>
+          {{ form.password }}
+          {% if form.password.errors %}
+          <p class="text-red-500 text-sm">{{ form.password.errors }}</p>
+          {% endif %}
+        </div>
+
+        <!-- Submit Button -->
+        <div class="mt-6">
+          <button type="submit"
+            class="btn btn-success btn-md bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">
+            Sign Up
+          </button>
+        </div>
       </form>
     </div>
+
   </div>
 </section>
 
