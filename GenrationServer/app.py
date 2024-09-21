@@ -1,6 +1,6 @@
 import eyed3
 import imageio
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, UploadFile, Query
 from pptx import Presentation
 import requests
 import os
@@ -16,7 +16,10 @@ from moviepy.video.io.ffmpeg_tools import ffmpeg_merge_video_audio
 import cv2
 import numpy as np
 from moviepy.editor import VideoFileClip, VideoClip, CompositeVideoClip
-
+import os
+import requests
+import json
+import zipfile
 app = FastAPI()
 
 XI_API_KEY = "38b0fb5c6fe325393ffc6f0883f73c2c"
@@ -208,20 +211,37 @@ def overlay_video(background_path, overlay_path, circle_radius, output_path):
 
     # Write the final video to the output path
     final_clip.write_videofile(output_path, codec="libx264", fps=background_clip.fps)
+
+def clear_directory_contents(directory):
+    for filename in os.listdir(directory):
+        file_path = os.path.join(directory, filename)
+        try:
+            if os.path.isfile(file_path):
+                os.remove(file_path)  # Remove files
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)  # Remove directories
+        except Exception as e:
+            print(f"Error deleting {file_path}: {e}")
+
 # API to create deepfake video using existing functionalities
 @app.post("/deepfake/")
-def create_deepfake(request: DeepFakeRequest):
-    ppt_path = request.ppt_path
-    image_path = request.image_path
-    video_path = request.video_path
+async def create_deepfake(
+    video_url: str = Query(...),
+    ppt_path: str = Query(...),
+    image_path: str = Query(...)
+):
 
-    # Extract speaker notes from PPT
+    ppt_path = "../media/" + ppt_path
+    image_path = "../media/" + image_path
+
+    print(video_url, ppt_path, image_path)
+
     extracted_notes = extract_speaker_notes(ppt_path)
 
     # Convert notes to audio
     audio_paths = []
     for i, note in enumerate(extracted_notes):
-        audio_path = comment_to_audio(note['speaker_notes'], i + 1)
+        audio_path = comment_to_audio(note['speaker_notes'], i )
         if audio_path:
             audio_paths.append(audio_path)
 
@@ -246,7 +266,7 @@ def create_deepfake(request: DeepFakeRequest):
     save_generated_video(predictions, filename='./genratedvideo/predicted_video.mp4')
 
     duration = 0
-    i = 1
+    i = 0
     durations = []
     for note in extracted_notes:
         duration += audio_length(f'./outputaudio/output{i}.mp3')
@@ -268,6 +288,52 @@ def create_deepfake(request: DeepFakeRequest):
     repetitions = time
 
     repeat_video(input_video_path, repetitions, output_video_path)
+
+    instructions = {
+        'parts': [
+            {
+                'file': 'document'
+            }
+        ],
+        "output": {
+            "type": "image",
+            "pages": {"start": 0, "end": -1},
+            "format": "jpg",
+            "width": 500
+        }
+    }
+
+    response = requests.request(
+        'POST',
+        'https://api.pspdfkit.com/build',
+        headers={
+            'Authorization': 'Bearer pdf_live_HbuwZsOVP1EujCsffxdtZM0FibkUxjyG2Iw8TKrniuf'
+        },
+        files={
+            'document': open(ppt_path, 'rb')
+        },
+        data={
+            'instructions': json.dumps(instructions)
+        },
+        stream=True
+    )
+
+    # Check if the response is successful
+    if response.status_code == 200:
+        # Create a directory to store the images
+        os.makedirs("images", exist_ok=True)
+
+        # Save the response content as a zip file
+        with open("images/images.zip", "wb") as f:
+            f.write(response.content)
+
+        # Extract the contents of the zip file
+        with zipfile.ZipFile("images/images.zip", "r") as zip_ref:
+            zip_ref.extractall("images")
+
+        print("Images saved successfully.")
+    else:
+        print("Failed to fetch images. Status code:", response.status_code)
 
     for j in range(i-1):
         image_path = f"./images/{j}.jpg"  # Replace with your image file path
@@ -313,20 +379,21 @@ def create_deepfake(request: DeepFakeRequest):
     # Merge video and audio using ffmpeg
     ffmpeg_merge_video_audio(video=video_path, audio=audio_path, output=output_path)
 
-    # Example usage:
+
     background_path = "./genratedvideo/combined_output_video.mp4"
     overlay_path = "./genratedvideo/final_rep_video.mp4"
     circle_radius = 500
-    output_path = f"{video_path}.mp4"
+    output_path = f"../media/video/{video_url}.mp4"
     overlay_video(background_path, overlay_path, circle_radius, output_path)
 
-    shutil.rmtree('./genratedvideo')
-    shutil.rmtree('./outputaudio')
-    shutil.rmtree('./images')
-    return {"message": "Deepfake creation started", "source_image": image_path, "video_path": video_path}
+    # Specify your directories
+    clear_directory_contents('./genratedvideo')
+    clear_directory_contents('./outputaudio')
+    clear_directory_contents('./images')
+    return {"message": "Deepfake creation started"}
 
 
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run(app, host="127.0.0.1", port=8001)
+    uvicorn.run(app, host="127.0.0.1", port=8080)
