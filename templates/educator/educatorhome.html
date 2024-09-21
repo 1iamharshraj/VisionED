@@ -1,55 +1,96 @@
 {% extends "educator/base.html" %}
-
+{% load static %}
 {% block title %}Educator Home{% endblock %}
 
 {% block content %}
-<h2 class="text-3xl font-bold mb-4 arima-5 p-5 m-5">Create Course</h2>
+<h2 class="text-3xl font-bold mb-4 arima-5 p-6">Create Course</h2>
 
-<section class="bg-secondary-background p-5 m-5 grid grid-cols-2 gap-6">
-    <!-- Form Row -->
-    <div>
-        <form method="POST" enctype="multipart/form-data" class="space-y-6">
+<section class="p-5 m-5 grid md:grid-cols-3 gap-6">
+    <!-- Column 1: Form (now spans 2 columns) -->
+    <div class="md:col-span-2 bg-secondary-background p-4">
+        <form method="POST" enctype="multipart/form-data" class="bg-secondary-background p-5 space-y-6">
             {% csrf_token %}
 
-            <!-- Title Field -->
-            <div class="mb-4">
-                <label for="id_title" class="block text-sm font-medium text-gray-700 mb-1">Title</label>
-                {{ form.title }}
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Subcolumn 1: Title and Description -->
+                <div class="space-y-4">
+                    <!-- Title Field -->
+                    <div>
+                        <label for="id_title" class="block text-pure-white text-sm font-medium mb-1">Title</label>
+                        {{ form.title }}
+                    </div>
+
+                    <!-- Description Field -->
+                    <div>
+                        <label for="id_description"
+                            class="block text-pure-white text-sm font-medium mb-1">Description</label>
+                        {{ form.description }}
+                    </div>
+                </div>
+
+                <!-- Subcolumn 2: Image and PPT Upload -->
+                <div class="space-y-4">
+                    <!-- Image Upload -->
+                    <div>
+                        <label for="id_image"
+                            class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer text-text-color bg-background hover:bg-gray-100">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                <svg class="w-8 h-8 mb-4 text-gray-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                </svg>
+                                <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Upload Image</span>
+                                </p>
+                            </div>
+                            {{ form.image }}
+                        </label>
+                    </div>
+
+                    <!-- PPT Upload -->
+                    <div>
+                        <label for="id_ppt_file"
+                            class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer text-text-color bg-background hover:bg-gray-100">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mb-4 fill-gray-500"
+                                    viewBox="0 0 32 32">
+                                    <path
+                                        d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-.035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z" />
+                                    <path
+                                        d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z" />
+                                </svg>
+                                <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Upload PPT</span></p>
+                            </div>
+                            {{ form.ppt_file }}
+                        </label>
+                    </div>
+                </div>
             </div>
 
-            <!-- Description Field -->
-            <div class="mb-4">
-                <label for="id_description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                {{ form.description }}
+            <div class="flex justify-center mt-6">
+                <button type="submit"
+                    class="bg-primary-ascent text-white px-4 py-2 w-3/6 rounded hover:bg-secondary-ascent">
+                    Create Course
+                </button>
             </div>
-
-            <!-- PPT File Field -->
-            <div class="mb-4">
-                <label for="id_ppt_file" class="block text-sm font-medium text-gray-700 mb-1">Upload PPT File</label>
-                {{ form.ppt_file }}
-            </div>
-
-            <!-- Image Field (Optional) -->
-            <div class="mb-4">
-                <label for="id_image" class="block text-sm font-medium text-gray-700 mb-1">Upload Image
-                    (Optional)</label>
-                {{ form.image }}
-            </div>
-
-            <!-- Submit Button -->
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                Upload
-            </button>
         </form>
     </div>
 
-    <!-- Other Divs Row -->
-    <div>
-        <!-- Add any content for your divs here -->
-        <p class="text-gray-700">This is some additional content in the next row.</p>
-        <p class="text-gray-700">You can add more divs, images, or text here.</p>
+    <!-- Column 2: Preview Content (now spans 1 column) -->
+    <div class="md:col-span-1 bg-secondary-background p-5 space-y-6">
+        <div class="flex flex-col items-center p-5">
+            <img src="{% static 'img/ImageVector-removebg-preview.png' %}" alt="Description"
+                class="w-[80%] h-auto mb-4" />
+            <div class="flex justify-between w-full">
+                <h2 class="text-lg font-bold arima-500 text-[14px] text-text-color">Title</h2>
+                <span class="text-text-color arima-500 text-[16px] text-sm">00:00:00</span>
+            </div>
+            <button type="text" href=""
+                class="bg-primary-ascent text-white px-4 py-2 w-3/4 rounded hover:bg-secondary-ascent">
+                Watch Video
+            </button>
+        </div>
     </div>
 </section>
-
-
 {% endblock %}

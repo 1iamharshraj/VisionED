@@ -131,7 +131,6 @@ os.path.join(BASE_DIR, "static")
 STATIC_ROOT = os.path.join(BASE_DIR, "assets")
 
 # Media files
-# Media settings
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -142,3 +141,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'home.CustomUser'  # Replace 'home' with the app name if it's different
+
+# Multithreading
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
