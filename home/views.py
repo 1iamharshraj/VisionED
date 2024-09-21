@@ -1,3 +1,5 @@
+import chromadb
+from chromadb.utils import embedding_functions
 from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
@@ -17,6 +19,7 @@ import google.generativeai as genai
 import requests
 import os
 from PyPDF2 import PdfReader
+from tasks import generate_video
 # import chromadb
 # import chromadb.utils.embedding_functions as embedding_functions
 class StudentVidView(View):
@@ -152,12 +155,16 @@ class EducatorHomeView(CreateView):
     model = EducatorUpload
     form_class = EducatorUploadForm
     template_name = 'educator/educatorhome.html'
-    success_url = '/edu_home/'
+    success_url = reverse_lazy("edu_home")
 
     def form_valid(self, form):
         # Set the educator field to the current user
         form.instance.educator = self.request.user
-        form.save()  # Save the form instance
+        educator_upload_instance = form.save()
+
+        # Trigger Celery task for video generation
+        generate_video.delay(educator_upload_instance.id)
+
         print(form.cleaned_data)  # Debugging line
         return super().form_valid(form)
 
@@ -250,7 +257,7 @@ def chatbot_response(request):
           """
             return prompt
 
-        save_path = "/content/1.pdf"
+        save_path = r".\media\uploads\1.pdf"
         pdf_text = load_pdf(save_path)
         chunks = split_text_recursively(pdf_text, max_length=2000, chunk_overlap=200)
         google_ef = embedding_functions.GoogleGenerativeAiEmbeddingFunction(api_key="AIzaSyBms6uYpRx7lCBGm5claKd5R-3cH235v8M")

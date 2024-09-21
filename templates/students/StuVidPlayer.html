@@ -26,6 +26,11 @@
                     <img src="/static/img/logo.png" alt="Logo" class="h-10 w-auto">
                 </div>
 
+            <!-- Navigation Links -->
+            <div class="hidden md:flex md:items-center md:space-x-8 mx-auto">
+                <a href="stu_home" class="hover:text-secondary-ascent">Home</a>
+                <a href="stu_course" class="border-b-2 border-secondary-ascent">Courses</a>
+            </div>
                 <!-- Navigation Links -->
                 <div class="hidden md:flex md:items-center md:space-x-8 mx-auto">
                     <a href="#" class="hover:text-secondary-ascent">Home</a>
@@ -129,19 +134,33 @@
                 // Clear input field
                 document.getElementById('chatInput').value = '';
 
-                // Simulate a chatbot response
-                setTimeout(function () {
-                    var botMessage = document.createElement('div');
-                    botMessage.className = 'bg-purple-500 text-white p-2 rounded-lg w-max self-end';
-                    botMessage.textContent = "This is a bot response.";  // Example response
-                    messageContainer.appendChild(botMessage);
+            // Send the message to the server via an API call
+            fetch('{% url "chatbot_response" %}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'  // Ensure CSRF token is included for security
+                },
+                body: JSON.stringify({ message: message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display the chatbot's response
+                var botMessage = document.createElement('div');
+                botMessage.className = 'bg-purple-500 text-white p-2 rounded-lg w-max self-end';
+                botMessage.textContent = data.response;  // Use the response from the backend
+                messageContainer.appendChild(botMessage);
 
-                    // Scroll to the bottom
-                    messageContainer.scrollTop = messageContainer.scrollHeight;
-                }, 500);  // Simulated delay for bot response
-            }
-        };
-    </script>
+                // Scroll to the bottom
+                messageContainer.scrollTop = messageContainer.scrollHeight;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    };
+</script>
+
 </body>
 
 </html>

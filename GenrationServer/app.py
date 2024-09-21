@@ -317,7 +317,7 @@ def create_deepfake(request: DeepFakeRequest):
     background_path = "./genratedvideo/combined_output_video.mp4"
     overlay_path = "./genratedvideo/final_rep_video.mp4"
     circle_radius = 500
-    output_path = "./genratedvideo/final_video.mp4"
+    output_path = f"{video_path}.mp4"
     overlay_video(background_path, overlay_path, circle_radius, output_path)
 
     shutil.rmtree('./genratedvideo')
