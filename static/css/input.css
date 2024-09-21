@@ -27,9 +27,42 @@
     font-style:normal;
   }
 
+  .arima-400  {
+      font-family: "Arima", system-ui;
+      font-optical-sizing: auto;
+      font-weight:400;
+      font-style:normal;
+  }
+
   .arima-500 {
     font-family: "Arima", system-ui;
     font-optical-sizing: auto;
     font-weight:500;
     font-style:normal;
   }
+
+
+
+  .custom-file-upload {
+    background-color: #191919;  /* Black background */
+    color: white;            /* White text */
+    border: none;            /* No border */
+    padding: 8px 16px;       /* Padding for button feel */
+    border-radius: 4px;      /* Slightly rounded corners */
+    cursor: pointer;         /* Pointer on hover */
+    margin-bottom: 16px;     /* Adds space between buttons */
+}
+
+.custom-submit-button {
+    background-color: #191919; /* Black background */
+    color: white;            /* White text */
+    border: none;            /* No border */
+    padding: 8px 16px;       /* Padding for button feel */
+    border-radius: 4px;      /* Rounded corners */
+    cursor: pointer;         /* Pointer on hover */
+}
+
+.custom-submit-button:hover,
+.custom-file-upload:hover {
+    background-color: #222;  /* Darken on hover */
+}
