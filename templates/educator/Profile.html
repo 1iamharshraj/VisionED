@@ -1,0 +1,135 @@
+{% load compress %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educator Profile</title>
+
+    <!-- Bootstrap CSS -->
+    {% compress css %}
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    {% endcompress %}
+</head>
+
+<body class="bg-secondary-background text-pure-white dark:text-white">
+    <!-- Navigation Bar -->
+    <nav class="bg-secondary-background shadow-md dark:bg-gray-900  absolute top-0 w-full">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center justify-start">
+                    <img src="{% static 'img/logo.png' %}" alt="Logo" class="h-10 w-auto">
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:flex md:items-center md:space-x-8 mx-auto">
+                    <a href="stu_home" class="hover:text-secondary-ascent">Home</a>
+                    <a href="#" class="border-b-2 border-secondary-ascent">Courses</a>
+                </div>
+
+                <!-- Profile Dropdown -->
+                <div class="relative flex-shrink-0">
+                    <button id="profileButton" class="flex items-center hover:text-secondary-ascent">
+                        <img src="https://via.placeholder.com/30" alt="Profile" class="rounded-full">
+                        <span class="ml-2">Profile</span>
+                    </button>
+                    <div id="profileDropdown"
+                        class="absolute right-0 z-10 hidden bg-secondary-background shadow-lg dark:bg-gray-900 mt-2 rounded-md w-48">
+                        <a href="#" class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">My
+                            Account</a>
+                        <a href="#"
+                            class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">Settings</a>
+                        <a href="login"
+                            class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Full-width gradient section -->
+    <!-- from-[#4A00E0] to-[#8E2DE2] -->
+    <section class="mt-16 relative w-full h-[200px] bg-gradient-to-r from-grad-r to-grad-l">
+        <!-- Content inside the gradient -->
+        <div class="flex justify-center items-center h-full">
+            <!-- Circle with image -->
+            <div
+                class="absolute top-[calc(100%-100px)] w-[200px] h-[200px] rounded-full overflow-hidden border-4 border-white shadow-lg">
+                <img src="{% static 'img/profile.jpg' %}" alt="Profile" class="w-full h-full object-cover">
+            </div>
+        </div>
+
+        <!-- User details section -->
+        <div class="flex justify-center items-center arima-400 mt-24">
+            <div class="grid grid-rows-2 text-right">
+                <!-- Username -->
+                <p class="text-pure-white text-2xl arima-400  font-bold">@jane12doe</p>
+                <!-- Profession -->
+                <p class="text-pure-white  arima-400 text-lg">Profession</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Empty section for further content -->
+    <section class="bg-background mt-44  min-w-[80%] h-min-[300px] p-10 mb-10">
+        <p class="arima-400 text-[40px] mb-5">Created Courses</p>
+        <!-- Grid layout for courses -->
+        <div class="grid grid-cols-2 gap-4">
+            <!-- Course 1 -->
+            <div class="flex border border-1 border-b-gray-dark space-x-4 bg-white p-4 rounded-md shadow-md">
+                <div class="flex-shrink-0">
+                    <img src="{% static 'img/course1.webp' %}" alt="Course 1" class="w-32 h-32 rounded-sm object-cover">
+                </div>
+                <div class="flex flex-col justify-center">
+                    <p class="text-sm font-semibold text-gray-700">Course Name 1</p>
+                    <p class="description arima-400 text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit. Nam pulvinar facilisis posuere. Pellentesque luctus aliquam nunc nec congue. Pellentesque
+                        sit amet est dapibus, tempus turpis</p>
+                </div>
+            </div>
+
+            <!-- Course 2 -->
+            <div class="flex border border-1 border-b-gray-dark space-x-4 bg-white p-4 rounded-md shadow-md">
+                <div class="flex-shrink-0">
+                    <img src="{% static 'img/course2.webp' %}" alt="Course 2" class="w-32 h-32 rounded-sm object-cover">
+                </div>
+                <div class="flex flex-col justify-center">
+                    <p class="text-sm font-semibold text-gray-700">Course Name 2</p>
+                    <p class="description arima-400 text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit. Nam pulvinar facilisis posuere. Pellentesque luctus aliquam nunc nec congue. Pellentesque
+                        sit amet est dapibus, tempus turpis</p>
+                </div>
+            </div>
+
+            <!-- Course 3 -->
+            <div class="flex border border-1 border-b-gray-dark space-x-4 bg-white p-4 rounded-md shadow-md">
+                <div class="flex-shrink-0">
+                    <img src="{% static 'img/course3.webp' %}" alt="Course 3" class="w-32 h-32 rounded-sm object-cover">
+                </div>
+                <div class="flex flex-col justify-center">
+                    <p class="text-sm font-semibold text-gray-700">Course Name 3</p>
+                    <p class="description arima-400 text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit. Nam pulvinar facilisis posuere. Pellentesque luctus aliquam nunc nec congue. Pellentesque
+                        sit amet est dapibus, tempus turpis</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <script>
+        document.getElementById('profileButton').onclick = function () {
+            var dropdown = document.getElementById('profileDropdown');
+            dropdown.classList.toggle('hidden');
+        };
+    </script>
+
+</body>
+
+</html>

@@ -2,6 +2,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,127 +14,134 @@
     <link rel="stylesheet" href="{% static 'css/output.css' %}">
     {% endcompress %}
 </head>
+
 <body class="bg-background text-white dark:text-white">
 
     <!-- Navigation Bar -->
-<nav class="bg-secondary-background shadow-md dark:bg-gray-900">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
-            <!-- Logo -->
-            <div class="flex items-center justify-start">
-                <img src="/static/img/logo.png" alt="Logo" class="h-10 w-auto">
-            </div>
+    <nav class="bg-secondary-background shadow-md dark:bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center justify-start">
+                    <img src="/static/img/logo.png" alt="Logo" class="h-10 w-auto">
+                </div>
 
-            <!-- Navigation Links -->
-            <div class="hidden md:flex md:items-center md:space-x-8 mx-auto">
-                <a href="#" class="hover:text-secondary-ascent">Home</a>
-                <a href="#" class="border-b-2 border-secondary-ascent">Courses</a>
-                <a href="#" class="hover:text-secondary-ascent">About</a>
-                <a href="#" class="hover:text-secondary-ascent">Contact Us</a>
-            </div>
+                <!-- Navigation Links -->
+                <div class="hidden md:flex md:items-center md:space-x-8 mx-auto">
+                    <a href="#" class="hover:text-secondary-ascent">Home</a>
+                    <a href="#" class="border-b-2 border-secondary-ascent">Courses</a>
+                </div>
 
-            <!-- Profile Dropdown -->
-            <div class="relative flex-shrink-0">
-                <button id="profileButton" class="flex items-center hover:text-secondary-ascent">
-                    <img src="https://via.placeholder.com/30" alt="Profile" class="rounded-full">
-                    <span class="ml-2">Profile</span>
-                </button>
-                <div id="profileDropdown" class="absolute right-0 z-10 hidden bg-secondary-background shadow-lg dark:bg-gray-900 mt-2 rounded-md w-48">
-                    <a href="#" class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">My Account</a>
-                    <a href="#" class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">Settings</a>
-                    <a href="login" class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">Logout</a>
+                <!-- Profile Dropdown -->
+                <div class="relative flex-shrink-0">
+                    <button id="profileButton" class="flex items-center hover:text-secondary-ascent">
+                        <img src="https://via.placeholder.com/30" alt="Profile" class="rounded-full">
+                        <span class="ml-2">Profile</span>
+                    </button>
+                    <div id="profileDropdown"
+                        class="absolute right-0 z-10 hidden bg-secondary-background shadow-lg dark:bg-gray-900 mt-2 rounded-md w-48">
+                        <a href="#" class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">My
+                            Account</a>
+                        <a href="#"
+                            class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">Settings</a>
+                        <a href="login"
+                            class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">Logout</a>
+                    </div>
                 </div>
             </div>
         </div>
+    </nav>
+
+
+
+    <!-- Chat Interface -->
+    <div id="chatbox"
+        class="hidden fixed bottom-16 right-6 w-96 h-96 bg-secondary-background text-black dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg shadow-lg p-4">
+        <div class="flex flex-col h-full">
+            <!-- Chatbox Header -->
+            <div class="flex items-center justify-between pb-2 border-b dark:border-gray-600">
+                <h2 class="text-lg font-semibold text-text-color">Ask anything ?</h2>
+                <button id="closeChatbot" class="text-gray-600 dark:text-gray-300 hover:text-gray-900">X</button>
+            </div>
+
+            <!-- Messages Container -->
+            <div id="messages" class="flex-grow overflow-y-auto mt-4 mb-2 flex flex-col space-y-2">
+                <!-- Chat messages will go here -->
+            </div>
+
+            <!-- Input Field with Send Button -->
+            <div class="flex mt-2">
+                <input id="chatInput" type="text" placeholder="Type your message..."
+                    class="flex-grow p-2 border rounded-l dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                <button id="sendMessage" class="bg-secondary-ascent text-white px-4 py-2 rounded-r">Send</button>
+            </div>
+        </div>
     </div>
-</nav>
-
-
-
-<!-- Chat Interface -->
-<div id="chatbox" class="hidden fixed bottom-16 right-6 w-96 h-96 bg-secondary-background text-black dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg shadow-lg p-4">
-    <div class="flex flex-col h-full">
-        <!-- Chatbox Header -->
-        <div class="flex items-center justify-between pb-2 border-b dark:border-gray-600">
-            <h2 class="text-lg font-semibold text-text-color">Ask anything ?</h2>
-            <button id="closeChatbot" class="text-gray-600 dark:text-gray-300 hover:text-gray-900">X</button>
-        </div>
-
-        <!-- Messages Container -->
-        <div id="messages" class="flex-grow overflow-y-auto mt-4 mb-2 flex flex-col space-y-2">
-            <!-- Chat messages will go here -->
-        </div>
-
-        <!-- Input Field with Send Button -->
-        <div class="flex mt-2">
-            <input id="chatInput" type="text" placeholder="Type your message..." class="flex-grow p-2 border rounded-l dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-            <button id="sendMessage" class="bg-secondary-ascent text-white px-4 py-2 rounded-r">Send</button>
-        </div>
-    </div>
-</div>
-<!-- Courses Section -->
-<div class="mt-8 max-w-7xl mx-auto p-6">
-    <h1 class="text-2xl font-semibold">Introduction to C++ </h1>
+    <!-- Courses Section -->
+    <div class="mt-8 max-w-7xl mx-auto p-6">
+        <h1 class="text-2xl font-semibold">Introduction to C++ </h1>
         <video class="h-full w-full rounded-lg" controls>
-      <source src="{{ video_data }}" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-</div>
+            <source src="{{ video_data }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
 
-<div class="fixed bottom-6 right-6">
-    <button id="chatbotButton" class="bg-secondary-background hover:bg-secondary-ascent text-white font-bold py-2 px-4 rounded-full">
-        Chat with us
-    </button>
-</div>
+    <div class="fixed bottom-6 right-6">
+        <button id="chatbotButton"
+            class="bg-secondary-background hover:bg-secondary-ascent text-white font-bold py-2 px-4 rounded-full">
+            Chat with us
+        </button>
+    </div>
 
-<script>
-    document.getElementById('chatbotButton').onclick = function() {
-        var chatbox = document.getElementById('chatbox');
-        chatbox.classList.toggle('hidden');
+    <script>
+        document.getElementById('chatbotButton').onclick = function () {
+            var chatbox = document.getElementById('chatbox');
+            chatbox.classList.toggle('hidden');
 
-        // Pause the video when the chatbox is opened
-        var video = document.querySelector('video');
-        if (!chatbox.classList.contains('hidden')) {
-            video.pause();
-        }
-    };
+            // Pause the video when the chatbox is opened
+            var video = document.querySelector('video');
+            if (!chatbox.classList.contains('hidden')) {
+                video.pause();
+            }
+        };
 
-    // Close chatbox
-    document.getElementById('closeChatbot').onclick = function() {
-        var chatbox = document.getElementById('chatbox');
-        chatbox.classList.add('hidden');
-    };
+        // Close chatbox
+        document.getElementById('closeChatbot').onclick = function () {
+            var chatbox = document.getElementById('chatbox');
+            chatbox.classList.add('hidden');
+        };
 
-    // Sending message logic with color and alignment styling
-    document.getElementById('sendMessage').onclick = function() {
-        var message = document.getElementById('chatInput').value;
-        if (message.trim() !== '') {
-            var messageContainer = document.getElementById('messages');
+        // Sending message logic with color and alignment styling
+        document.getElementById('sendMessage').onclick = function () {
+            var message = document.getElementById('chatInput').value;
+            if (message.trim() !== '') {
+                var messageContainer = document.getElementById('messages');
 
-            // User message (left-aligned, white background, purple border, purple text, rounded)
-            var userMessage = document.createElement('div');
-            userMessage.className = 'border-2 border-purple-500 text-purple-500 bg-white p-2 rounded-lg w-max self-start';
-            userMessage.textContent = message;
-            messageContainer.appendChild(userMessage);
-
-            // Scroll to the bottom
-            messageContainer.scrollTop = messageContainer.scrollHeight;
-
-            // Clear input field
-            document.getElementById('chatInput').value = '';
-
-            // Simulate a chatbot response
-            setTimeout(function() {
-                var botMessage = document.createElement('div');
-                botMessage.className = 'bg-purple-500 text-white p-2 rounded-lg w-max self-end';
-                botMessage.textContent = "This is a bot response.";  // Example response
-                messageContainer.appendChild(botMessage);
+                // User message (left-aligned, white background, purple border, purple text, rounded)
+                var userMessage = document.createElement('div');
+                userMessage.className = 'border-2 border-purple-500 text-purple-500 bg-white p-2 rounded-lg w-max self-start';
+                userMessage.textContent = message;
+                messageContainer.appendChild(userMessage);
 
                 // Scroll to the bottom
                 messageContainer.scrollTop = messageContainer.scrollHeight;
-            }, 500);  // Simulated delay for bot response
-        }
-    };
-</script>
+
+                // Clear input field
+                document.getElementById('chatInput').value = '';
+
+                // Simulate a chatbot response
+                setTimeout(function () {
+                    var botMessage = document.createElement('div');
+                    botMessage.className = 'bg-purple-500 text-white p-2 rounded-lg w-max self-end';
+                    botMessage.textContent = "This is a bot response.";  // Example response
+                    messageContainer.appendChild(botMessage);
+
+                    // Scroll to the bottom
+                    messageContainer.scrollTop = messageContainer.scrollHeight;
+                }, 500);  // Simulated delay for bot response
+            }
+        };
+    </script>
 </body>
+
 </html>
