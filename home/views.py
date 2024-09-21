@@ -52,6 +52,10 @@ class StudentCourseView(View):
     def get(self, request):
         return render(request,"students/StuCourses.html")
 
+class ProfileView(View):
+    def get(self, request):
+        return render(request,"students/Profile.html")
+
 
 class LoginView(View):
     def get(self, request):
