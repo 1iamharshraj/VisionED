@@ -1,5 +1,5 @@
-import chromadb
-from chromadb.utils import embedding_functions
+#import chromadb
+#from chromadb.utils import embedding_functions
 from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
@@ -19,7 +19,8 @@ import google.generativeai as genai
 import requests
 import os
 from PyPDF2 import PdfReader
-from tasks import generate_video
+
+from .tasks import generate_video
 # import chromadb
 # import chromadb.utils.embedding_functions as embedding_functions
 class StudentVidView(View):
@@ -260,17 +261,17 @@ def chatbot_response(request):
         save_path = r".\media\uploads\1.pdf"
         pdf_text = load_pdf(save_path)
         chunks = split_text_recursively(pdf_text, max_length=2000, chunk_overlap=200)
-        google_ef = embedding_functions.GoogleGenerativeAiEmbeddingFunction(api_key="AIzaSyBms6uYpRx7lCBGm5claKd5R-3cH235v8M")
-        client = chromadb.PersistentClient(path="embeddings/gemini")
+        #google_ef = embedding_functions.GoogleGenerativeAiEmbeddingFunction(api_key="AIzaSyBms6uYpRx7lCBGm5claKd5R-3cH235v8M")
+        #client = chromadb.PersistentClient(path="embeddings/gemini")
 
-        collection = client.get_or_create_collection(name="pdf_rag", embedding_function=google_ef)
+        #collection = client.get_or_create_collection(name="pdf_rag", embedding_function=google_ef)
 
-        for i, d in enumerate(chunks):
-            collection.add(documents=[d], ids=[str(i)])
-        context = find_relevant_context("role of encoders", collection)
-        escaped_context = build_escaped_context(context)
-        answer = generate_answer_from_gemini(f"{message}")
-        response = answer.text
-        #response = "This is a response to: "
+        #for i, d in enumerate(chunks):
+           # collection.add(documents=[d], ids=[str(i)])
+        #context = find_relevant_context("role of encoders", collection)
+        #escaped_context = build_escaped_context(context)
+        #answer = generate_answer_from_gemini(f"{message}")
+        #response = answer.text
+        response = "This is a response to:"
         return JsonResponse({'response': response})
 
