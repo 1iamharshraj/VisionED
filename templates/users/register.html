@@ -3,12 +3,12 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
-    {% load static %}
+{% load static %}
 
 <nav></nav>
 
 <section class="mt-8">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <!-- Left Column: Text -->
         <div class="p-4 ml-5">
             <p class="text-[4rem] arima-300 text-text-color ml-10">Revolutionize</p>
@@ -16,29 +16,34 @@
             <!-- Flex container to align Learning and With next to each other -->
             <div class="flex items-center ml-7">
                 <p class="text-[4rem] arima-500 text-text-color">Learning</p>
-                <p class="w-[100px] h-[100px] arima-500 flex items-center justify-center text-[2rem] border-2 border-pure-white text-pure-white rounded-[20%] ml-4">
+                <p
+                    class="w-[100px] h-[100px] arima-500 flex items-center justify-center text-[2rem] border-2 border-pure-white text-pure-white rounded-[20%] ml-4">
                     With
                 </p>
             </div>
 
-            <p class="text-[4rem] text-primary-ascent arima-500 ml-6">AI Driven</p>
+            <!-- AI Driven with GIF on the same line -->
+            <div class="flex items-center ml-6">
+                <p class="text-[4rem] text-primary-ascent arima-500">AI Driven</p>
+                <!-- Insert your GIF here -->
+                <img src="{% static 'img/home.gif'%}" alt="AI GIF" class="w-[100px] h-[100px] ml-4">
+            </div>
+
             <p class="text-[4rem] text-text-color arima-500 ml-9">Education</p>
             <p class="mb-4"></p>
         </div>
 
-        <!-- Center Column: GIF -->
-        <div class="flex justify-center items-center">
-        </div>
+
 
         <!-- Right Column: Sign Up Form -->
-        <div class="p-4 bg-background bg-opacity-50 backdrop-blur-md ml-5 min-w-[250px] min-h-[500px] flex flex-col justify-center items-center space-y-4">
-        <img src="{% static 'img/home.gif' %}" class="object-contain w-[100px] h-[25px]" alt="Logo">
-
+        <div
+            class="p-4 bg-background bg-opacity-50 backdrop-blur-md ml-5 min-w-[250px] min-h-[500px] flex flex-col justify-center items-center space-y-4">
             <!-- Sign Up Heading -->
             <p class="text-primary-ascent text-[36px] arima-300">Sign Up</p>
 
             <!-- Subtitle Text -->
-            <p class="text-pure-white text-[16px] arima-200 text-center">Begin your journey for AI-assisted learning.</p>
+            <p class="text-pure-white text-[16px] arima-200 text-center">Begin your journey for AI-assisted learning.
+            </p>
 
             <!-- Sign Up Form -->
             <form method="post" class="bg-gray-800 text-text-color p-3 rounded-sm shadow-md w-full max-w-sm">
@@ -51,7 +56,7 @@
                     </label>
                     {{ form.account_type }}
                     {% if form.account_type.errors %}
-                        <p class="text-red-500 text-sm">{{ form.account_type.errors }}</p>
+                    <p class="text-red-500 text-sm">{{ form.account_type.errors }}</p>
                     {% endif %}
                 </div>
 
@@ -62,7 +67,7 @@
                     </label>
                     {{ form.first_name }}
                     {% if form.first_name.errors %}
-                        <p class="text-red-500 text-sm">{{ form.first_name.errors }}</p>
+                    <p class="text-red-500 text-sm">{{ form.first_name.errors }}</p>
                     {% endif %}
                 </div>
 
@@ -73,7 +78,7 @@
                     </label>
                     {{ form.last_name }}
                     {% if form.last_name.errors %}
-                        <p class="text-red-500 text-sm">{{ form.last_name.errors }}</p>
+                    <p class="text-red-500 text-sm">{{ form.last_name.errors }}</p>
                     {% endif %}
                 </div>
 
@@ -84,7 +89,7 @@
                     </label>
                     {{ form.email }}
                     {% if form.email.errors %}
-                        <p class="text-red-500 text-sm">{{ form.email.errors }}</p>
+                    <p class="text-red-500 text-sm">{{ form.email.errors }}</p>
                     {% endif %}
                 </div>
 
@@ -95,7 +100,7 @@
                     </label>
                     {{ form.username }}
                     {% if form.username.errors %}
-                        <p class="text-red-500 text-sm">{{ form.username.errors }}</p>
+                    <p class="text-red-500 text-sm">{{ form.username.errors }}</p>
                     {% endif %}
                 </div>
 
@@ -106,13 +111,14 @@
                     </label>
                     {{ form.password }}
                     {% if form.password.errors %}
-                        <p class="text-red-500 text-sm">{{ form.password.errors }}</p>
+                    <p class="text-red-500 text-sm">{{ form.password.errors }}</p>
                     {% endif %}
                 </div>
 
                 <!-- Submit Button -->
                 <div class="mt-4 flex justify-center items-center text-center">
-                    <button type="submit" class="bg-secondary-ascent btn-lg w-full h-[40px] text-center hover:bg-primary-ascent text-pure-white arima-300 py-2 px-4 rounded">
+                    <button type="submit"
+                        class="bg-secondary-ascent btn-lg w-full h-[40px] text-center hover:bg-primary-ascent text-pure-white arima-300 py-2 px-4 rounded">
                         Sign Up
                     </button>
                 </div>
