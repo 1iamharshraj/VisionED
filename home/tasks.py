@@ -2,7 +2,7 @@ import httpx
 from celery import shared_task
 import requests
 from VisionED import settings
-from .models import EducatorUpload, Video
+from .models import EducatorUpload
 import logging
 
 logger = logging.getLogger(__name__)

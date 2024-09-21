@@ -22,7 +22,7 @@ import json
 import zipfile
 app = FastAPI()
 
-XI_API_KEY = "38b0fb5c6fe325393ffc6f0883f73c2c"
+XI_API_KEY = "sk_6586939c68466d3c169180fb2d39975459d8bad741de6503"
 output_dir = "./outputaudio"
 voice_id = "29vD33N1CtxCmqQRPOHJ"
 
@@ -76,6 +76,7 @@ def comment_to_audio(text, i):
                 f.write(chunk)
         return output_path
     else:
+        print("cta_err")
         return None
 
 
@@ -274,7 +275,7 @@ async def create_deepfake(
         i += 1
     time = duration / audio_length('./genratedvideo/predicted_video.mp4')
 
-    input_audio_files = [ f"./outputaudio/output{x}.mp3" for x in range(i-1) ]
+    input_audio_files = [ f"./outputaudio/output{x}.mp3" for x in range(i) ]
 
     output_audio_file = "./outputaudio/combined_audio.mp3"
 

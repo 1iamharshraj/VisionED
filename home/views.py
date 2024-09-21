@@ -1,5 +1,11 @@
-#import chromadb
-#from chromadb.utils import embedding_functions
+import google.generativeai as genai
+import os
+from PyPDF2 import PdfReader
+import requests
+import chromadb
+import chromadb.utils.embedding_functions as embedding_functions
+
+
 from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
@@ -14,12 +20,6 @@ from django.shortcuts import render, redirect
 from django.views import View
 from .forms import LoginForm
 from .models import EducatorUpload, WatchedCourse
-
-import google.generativeai as genai
-import requests
-import os
-from PyPDF2 import PdfReader
-
 from .tasks import generate_video
 # import chromadb
 # import chromadb.utils.embedding_functions as embedding_functions
@@ -28,19 +28,14 @@ class StudentVidView(View):
         # URL for the Node.js server, fetching the video based on video_id
         node_server_url = f"http://localhost:3000/{video_id}.mp4"
 
-        # try:
-        #     # Make a request to the Node.js server to get the video details
-        #     response = requests.get(node_server_url, stream=True)
-        #     response.raise_for_status()  # Raise an exception for HTTP errors
-        #
-        #     # If you just want to get the URL for the video, you can directly return it to the template.
-        #     video_data = node_server_url
-        # except requests.exceptions.RequestException as e:
-        #     # Handle errors, such as connection issues
-        #     print(f"Error fetching video data: {e}")
-        #     video_data = None
-
         video_data = node_server_url
+
+        educatorupload = EducatorUpload.objects.get(id=video_id)
+
+        obj = WatchedCourse()
+        obj.student = self.request.user
+        obj.educator_upload = educatorupload
+        obj.save()
 
         # Render the template and pass the video data
         return render(request, "students/StuVidPlayer.html", {'video_data': video_data})
@@ -54,7 +49,8 @@ class StudentHomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # Get the recent watched courses for the logged-in student
-        context['recently_watched_courses'] = WatchedCourse.objects.filter(student=self.request.user).order_by('-watched_at')[:5]  # Last 5 watched courses
+        context['studentname'] = self.request.user.first_name
+        context['recently_watched_courses'] = WatchedCourse.objects.filter(student=self.request.user).order_by('-watched_at')[:3]  # Last 5 watched courses
         return context
 
 
@@ -68,9 +64,13 @@ class  EducatorProfileView(TemplateView):
         context['accounttype'] = self.request.user.account_type.capitalize()
         return context
 
-class StudentCourseView(View):
-    def get(self, request):
-        return render(request,"students/StuCourses.html")
+class StudentCourseView(TemplateView):
+    template_name = "students/StuCourses.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["courses"] = EducatorUpload.objects.order_by('-created_at')[:3]
+        return context
+
 
 class StudentProfileView(TemplateView):
         template_name = 'students/Profile.html'
@@ -173,9 +173,11 @@ class EducatorHomeView(CreateView):
         # Set the educator field to the current user
         form.instance.educator = self.request.user
         educator_upload_instance = form.save()
-
+        print(1)
         # Trigger Celery task for video generation
-        generate_video.delay(educator_upload_instance.id)
+        #generate_video.delay(educator_upload_instance.id)
+        generate_video(educator_upload_instance.id)
+        print(4)
 
         print(form.cleaned_data)  # Debugging line
         return super().form_valid(form)
@@ -191,7 +193,15 @@ class EducatorHomeView(CreateView):
         context['educator_uploads'] = EducatorUpload.objects.filter(educator=self.request.user)
         return context
 
-
+class  EducatorProfileView(TemplateView):
+    template_name='educator/Profile.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Get the recent watched courses for the logged-in student
+        context['educatorname'] = self.request.user.first_name
+        context['username'] = self.request.user.username
+        context['accounttype'] = self.request.user.account_type.capitalize()
+        return context
 
 
 def chatbot_response(request):
@@ -200,6 +210,34 @@ def chatbot_response(request):
 
         # Use a chatbot model (like an NLP library or a machine learning model) to generate a response
         genai.configure(api_key="AIzaSyBms6uYpRx7lCBGm5claKd5R-3cH235v8M")
+
+        def generate_answer_from_gemini(prompt):
+            model = genai.GenerativeModel('gemini-1.5-flash-latest')
+            result = model.generate_content(prompt)
+            return result
+
+        # create a method called download_pdf which will take a url and a save_path
+        # and download the pdf from the url and save it in the path specified.
+
+        def download_pdf(url, save_path):
+
+            response = requests.get(url)
+            response.raise_for_status()
+
+            with open(save_path, "wb") as file:
+                file.write(response.content)
+
+        def load_pdf(file_path):
+            pdf_reader = PdfReader(file_path)
+            text = ""
+            for page in pdf_reader.pages:
+                text += page.extract_text()
+            return text
+
+        # build a function called split_text_recursively which will take
+        # text which is the original text which needs to be split.
+        # the max_length of the chunk and the chunk_overlap to specify how much overlap is allowed
+        # between two chunks.
 
         def split_text_recursively(text, max_length=1000, chunk_overlap=0):
             chunks = []
@@ -223,20 +261,6 @@ def chatbot_response(request):
                     break
             return chunks
 
-        def load_pdf(file_path):
-            pdf_reader = PdfReader(file_path)
-            text = ""
-            for page in pdf_reader.pages:
-                text += page.extract_text()
-            return text
-
-        def download_pdf(url, save_path):
-            response = requests.get(url)
-            response.raise_for_status()
-
-            with open(save_path, "wb") as file:
-                file.write(response.content)
-
         def build_escaped_context(context):
             escaped_context = ""
             for item in context:
@@ -248,18 +272,13 @@ def chatbot_response(request):
             escaped_context = build_escaped_context(results['documents'][0])
             return escaped_context
 
-        def generate_answer_from_gemini(prompt):
-            model = genai.GenerativeModel('gemini-1.5-flash-latest')
-            result = model.generate_content(prompt)
-            return result
-
         def create_prompt_for_gemini(query, context):
             prompt = f"""
           You are a helpful agent that answers questions using the text from the context below.
           Both the question and the context is shared with you and you should answer the
           question basis the context. If the context does not have enough information
           for you to answer the question correctly, inform about the absence of relevant
-          context as part of your answer.
+          context as part of your answer.make the answer short and within 50-100 words
 
           Question : {query}
           \n
@@ -269,20 +288,24 @@ def chatbot_response(request):
           """
             return prompt
 
-        save_path = r".\media\uploads\1.pdf"
+        save_path = "./media/uploads/1.pdf"
         pdf_text = load_pdf(save_path)
         chunks = split_text_recursively(pdf_text, max_length=2000, chunk_overlap=200)
-        #google_ef = embedding_functions.GoogleGenerativeAiEmbeddingFunction(api_key="AIzaSyBms6uYpRx7lCBGm5claKd5R-3cH235v8M")
-        #client = chromadb.PersistentClient(path="embeddings/gemini")
 
-        #collection = client.get_or_create_collection(name="pdf_rag", embedding_function=google_ef)
+        google_ef = embedding_functions.GoogleGenerativeAiEmbeddingFunction(
+            api_key="AIzaSyBms6uYpRx7lCBGm5claKd5R-3cH235v8M")
+        client = chromadb.PersistentClient(path="embeddings/gemini")
 
-        #for i, d in enumerate(chunks):
-           # collection.add(documents=[d], ids=[str(i)])
-        #context = find_relevant_context("role of encoders", collection)
-        #escaped_context = build_escaped_context(context)
-        #answer = generate_answer_from_gemini(f"{message}")
-        #response = answer.text
-        response = "This is a response to:"
+        collection = client.get_or_create_collection(name="pdf_rag", embedding_function=google_ef)
+
+        for i, d in enumerate(chunks):
+            collection.add(documents=[d], ids=[str(i)])
+
+        context = find_relevant_context("role of array", collection)
+
+        answer = generate_answer_from_gemini(f"{message}")
+        response = answer.text
+
+        #response = "This is a response to: "
         return JsonResponse({'response': response})
 
