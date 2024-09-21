@@ -19,7 +19,7 @@ import google.generativeai as genai
 import requests
 import os
 from PyPDF2 import PdfReader
-from tasks import generate_video
+from .tasks import generate_video
 # import chromadb
 # import chromadb.utils.embedding_functions as embedding_functions
 class StudentVidView(View):
@@ -53,6 +53,9 @@ class StudentHomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # Get the recent watched courses for the logged-in student
+        context['studentname'] = self.request.user.first_name
+        context['username'] = self.request.user.username
+        context['accounttype'] = self.request.user.account_type
         context['recently_watched_courses'] = WatchedCourse.objects.filter(student=self.request.user).order_by('-watched_at')[:5]  # Last 5 watched courses
         return context
 
@@ -62,7 +65,23 @@ class StudentCourseView(View):
 
 class StudentProfileView(TemplateView):
         template_name = 'students/Profile.html'
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            # Get the recent watched courses for the logged-in student 
+            context['studentname'] = self.request.user.first_name
+            context['username'] = self.request.user.username
+            context['accounttype'] = self.request.user.account_type.capitalize()
+            return context
 
+class  EducatorProfileView(TemplateView):
+    template_name='educator/Profile.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Get the recent watched courses for the logged-in student 
+        context['educatorname'] = self.request.user.first_name
+        context['username'] = self.request.user.username
+        context['accounttype'] = self.request.user.account_type.capitalize()
+        return context
 
 class LoginView(View):
     def get(self, request):
@@ -183,6 +202,8 @@ class EducatorHomeView(CreateView):
 
 
 def chatbot_response(request):
+    # here
+
     if request.method == 'POST':
         message = request.POST.get('message')
 
@@ -271,6 +292,8 @@ def chatbot_response(request):
         escaped_context = build_escaped_context(context)
         answer = generate_answer_from_gemini(f"{message}")
         response = answer.text
-        #response = "This is a response to: "
+
+    # COmment from here to here
+        response = "This is a response to: "
         return JsonResponse({'response': response})
 
