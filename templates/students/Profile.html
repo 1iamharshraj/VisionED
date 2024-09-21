@@ -78,28 +78,51 @@
 
 
     <!-- Empty section for further content -->
-    <section class="bg-background mt-36  min-w-[80%] h-auto  p-10 mb-5">
-        <p class="arima-400 text">Your Courses</p>
+    <section class="bg-background mt-44  min-w-[80%] h-min-[300px] p-10 mb-10">
+        <p class="arima-400 text-[40px] mb-5">Your Courses</p>
         <!-- Grid layout for courses -->
         <div class="grid grid-cols-2 gap-4">
             <!-- Course 1 -->
-            <div class="flex items-center space-x-4 bg-white p-4 rounded-md shadow-md">
-                <img src="{% static 'img/course1.webp' %}" alt="Course 1" class="w-24 h-24 rounded-sm object-cover">
-                <p class="text-sm font-semibold text-gray-700">Course Name 1</p>
+            <div class="flex border border-1 border-b-gray-dark space-x-4 bg-white p-4 rounded-md shadow-md">
+                <div class="flex-shrink-0">
+                    <img src="{% static 'img/course1.webp' %}" alt="Course 1" class="w-32 h-32 rounded-sm object-cover">
+                </div>
+                <div class="flex flex-col justify-center">
+                    <p class="text-sm font-semibold text-gray-700">Course Name 1</p>
+                    <p class="description arima-400 text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit. Nam pulvinar facilisis posuere. Pellentesque luctus aliquam nunc nec congue. Pellentesque
+                        sit amet est dapibus, tempus turpis</p>
+                </div>
             </div>
 
             <!-- Course 2 -->
-            <div class="flex items-center space-x-4 bg-white p-4 rounded-md shadow-md">
-                <img src="{% static 'img/course2.webp' %}" alt="Course 2" class="w-24 h-24 rounded-sm object-cover">
-                <p class="text-sm font-semibold text-gray-700">Course Name 2</p>
+            <div class="flex border border-1 border-b-gray-dark space-x-4 bg-white p-4 rounded-md shadow-md">
+                <div class="flex-shrink-0">
+                    <img src="{% static 'img/course2.webp' %}" alt="Course 2" class="w-32 h-32 rounded-sm object-cover">
+                </div>
+                <div class="flex flex-col justify-center">
+                    <p class="text-sm font-semibold text-gray-700">Course Name 2</p>
+                    <p class="description arima-400 text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit. Nam pulvinar facilisis posuere. Pellentesque luctus aliquam nunc nec congue. Pellentesque
+                        sit amet est dapibus, tempus turpis</p>
+                </div>
             </div>
 
-            <div class="flex items-center space-x-4 bg-white p-4 rounded-md shadow-md">
-                <img src="{% static 'img/course3.webp' %}" alt="Course 2" class="w-24 h-24 rounded-sm object-cover">
-                <p class="text-sm font-semibold text-gray-700">Course Name 3</p>
+            <!-- Course 3 -->
+            <div class="flex border border-1 border-b-gray-dark space-x-4 bg-white p-4 rounded-md shadow-md">
+                <div class="flex-shrink-0">
+                    <img src="{% static 'img/course3.webp' %}" alt="Course 3" class="w-32 h-32 rounded-sm object-cover">
+                </div>
+                <div class="flex flex-col justify-center">
+                    <p class="text-sm font-semibold text-gray-700">Course Name 3</p>
+                    <p class="description arima-400 text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit. Nam pulvinar facilisis posuere. Pellentesque luctus aliquam nunc nec congue. Pellentesque
+                        sit amet est dapibus, tempus turpis</p>
+                </div>
             </div>
         </div>
     </section>
+
 
 
     <script>
