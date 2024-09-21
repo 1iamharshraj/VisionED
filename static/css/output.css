@@ -640,16 +640,16 @@ video {
   top: calc(100% - 100px);
 }
 
+.right-14 {
+  right: 3.5rem;
+}
+
 .z-10 {
   z-index: 10;
 }
 
 .z-20 {
   z-index: 20;
-}
-
-.m-5 {
-  margin: 1.25rem;
 }
 
 .mx-auto {
@@ -675,10 +675,6 @@ video {
 
 .mb-4 {
   margin-bottom: 1rem;
-}
-
-.mb-5 {
-  margin-bottom: 1.25rem;
 }
 
 .mb-5 {
@@ -713,16 +709,16 @@ video {
   margin-left: 2.25rem;
 }
 
+.mr-5 {
+  margin-right: 1.25rem;
+}
+
 .mt-0\.5 {
   margin-top: 0.125rem;
 }
 
 .mt-1 {
   margin-top: 0.25rem;
-}
-
-.mt-16 {
-  margin-top: 4rem;
 }
 
 .mt-16 {
@@ -737,16 +733,8 @@ video {
   margin-top: 6rem;
 }
 
-.mt-24 {
-  margin-top: 6rem;
-}
-
 .mt-3 {
   margin-top: 0.75rem;
-}
-
-.mt-36 {
-  margin-top: 9rem;
 }
 
 .mt-4 {
@@ -767,14 +755,6 @@ video {
 
 .mt-8 {
   margin-top: 2rem;
-}
-
-.mb-10 {
-  margin-bottom: 2.5rem;
-}
-
-.mt-44 {
-  margin-top: 11rem;
 }
 
 .line-clamp-3 {
@@ -822,10 +802,6 @@ video {
   height: 4rem;
 }
 
-.h-24 {
-  height: 6rem;
-}
-
 .h-32 {
   height: 8rem;
 }
@@ -854,10 +830,6 @@ video {
   height: 200px;
 }
 
-.h-\[200px\] {
-  height: 200px;
-}
-
 .h-\[40px\] {
   height: 40px;
 }
@@ -874,8 +846,8 @@ video {
   height: 100vh;
 }
 
-.h-32 {
-  height: 8rem;
+.h-\[300px\] {
+  height: 300px;
 }
 
 .min-h-\[500px\] {
@@ -884,10 +856,6 @@ video {
 
 .min-h-screen {
   min-height: 100vh;
-}
-
-.w-24 {
-  width: 6rem;
 }
 
 .w-3\/4 {
@@ -926,10 +894,6 @@ video {
   width: 200px;
 }
 
-.w-\[200px\] {
-  width: 200px;
-}
-
 .w-\[80\%\] {
   width: 80%;
 }
@@ -947,16 +911,12 @@ video {
   width: max-content;
 }
 
-.w-32 {
-  width: 8rem;
+.w-\[300px\] {
+  width: 300px;
 }
 
 .min-w-\[250px\] {
   min-width: 250px;
-}
-
-.min-w-\[80\%\] {
-  min-width: 80%;
 }
 
 .min-w-\[80\%\] {
@@ -993,14 +953,6 @@ video {
 
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
-}
-
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.grid-rows-2 {
-  grid-template-rows: repeat(2, minmax(0, 1fr));
 }
 
 .grid-cols-2 {
@@ -1053,12 +1005,6 @@ video {
   margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
-.space-x-4 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(1rem * var(--tw-space-x-reverse));
-  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
 .space-y-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
@@ -1083,10 +1029,6 @@ video {
 
 .self-end {
   align-self: flex-end;
-}
-
-.overflow-hidden {
-  overflow: hidden;
 }
 
 .overflow-hidden {
@@ -1147,10 +1089,6 @@ video {
   border-width: 4px;
 }
 
-.border-4 {
-  border-width: 4px;
-}
-
 .border-b {
   border-bottom-width: 1px;
 }
@@ -1181,11 +1119,6 @@ video {
 .border-secondary-ascent {
   --tw-border-opacity: 1;
   border-color: rgb(154 141 246 / var(--tw-border-opacity));
-}
-
-.border-b-gray-dark {
-  --tw-border-opacity: 1;
-  border-bottom-color: rgb(39 52 68 / var(--tw-border-opacity));
 }
 
 .border-b-gray-dark {
@@ -1245,30 +1178,6 @@ video {
   --tw-gradient-to: #355C7D var(--tw-gradient-to-position);
 }
 
-.bg-gradient-to-r {
-  background-image: linear-gradient(to right, var(--tw-gradient-stops));
-}
-
-.from-\[\#4A00E0\] {
-  --tw-gradient-from: #4A00E0 var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(74 0 224 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
-.from-grad-r {
-  --tw-gradient-from: #c06c84 var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(192 108 132 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
-.to-\[\#8E2DE2\] {
-  --tw-gradient-to: #8E2DE2 var(--tw-gradient-to-position);
-}
-
-.to-grad-l {
-  --tw-gradient-to: #355C7D var(--tw-gradient-to-position);
-}
-
 .bg-cover {
   background-size: cover;
 }
@@ -1287,17 +1196,8 @@ video {
      object-fit: cover;
 }
 
-.object-cover {
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
 .p-1 {
   padding: 0.25rem;
-}
-
-.p-10 {
-  padding: 2.5rem;
 }
 
 .p-10 {
@@ -1363,10 +1263,6 @@ video {
   text-align: right;
 }
 
-.text-right {
-  text-align: right;
-}
-
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
@@ -1397,6 +1293,10 @@ video {
   font-size: 36px;
 }
 
+.text-\[40px\] {
+  font-size: 40px;
+}
+
 .text-\[4rem\] {
   font-size: 4rem;
 }
@@ -1419,10 +1319,6 @@ video {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
-}
-
-.text-\[40px\] {
-  font-size: 40px;
 }
 
 .font-\[16px\] {
@@ -1559,10 +1455,93 @@ video {
   /* Pointer on hover */
 }
 
+/* Darken buttons on hover */
+
 .custom-submit-button:hover,
 .custom-file-upload:hover {
   background-color: #222;
   /* Darken on hover */
+}
+
+/* Target buttons under input fields */
+
+input ~ .custom-submit-button,
+input ~ .custom-file-upload,
+.custom-file-upload ~ .custom-submit-button {
+  display: none;
+  /* Hide by default */
+}
+
+input:focus ~ .custom-submit-button,
+input:focus ~ .custom-file-upload,
+.custom-file-upload:focus ~ .custom-submit-button {
+  display: block;
+  /* Show when input is focused */
+  background-color: #222;
+  /* Ensure dark appearance */
+}
+
+/* Hide the default file input */
+
+.custom-file-upload input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  /* Make it invisible */
+  cursor: pointer;
+  /* Change cursor on hover */
+}
+
+.custom-file-upload > button {
+  background-color: #191919;
+  /* Black background for the button */
+  color: white;
+  /* White text */
+  border: none;
+  /* No border */
+  padding: 8px 16px;
+  /* Padding for button feel */
+  border-radius: 4px;
+  /* Slightly rounded corners */
+  cursor: pointer;
+  /* Pointer on hover */
+  margin-bottom: 16px;
+  /* Adds space between buttons */
+}
+
+.custom-file-upload > button:hover {
+  background-color: #222;
+  /* Darken on hover */
+}
+
+#id_image {
+  background-color:#191919;
+  display:none;
+}
+
+#id_ppt_file {
+  display:none;
+}
+
+@keyframes hover-animation {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+#watch-btn:hover {
+  animation: hover-animation 0.3s infinite;
 }
 
 .hover\:bg-primary-ascent:hover {
