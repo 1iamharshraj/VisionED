@@ -48,24 +48,91 @@
     </div>
 </nav>
 
+
+
+<!-- Chat Interface -->
+<div id="chatbox" class="hidden fixed bottom-16 right-6 w-96 h-96 bg-secondary-background text-black dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg shadow-lg p-4">
+    <div class="flex flex-col h-full">
+        <!-- Chatbox Header -->
+        <div class="flex items-center justify-between pb-2 border-b dark:border-gray-600">
+            <h2 class="text-lg font-semibold text-text-color">Ask anything ?</h2>
+            <button id="closeChatbot" class="text-gray-600 dark:text-gray-300 hover:text-gray-900">X</button>
+        </div>
+
+        <!-- Messages Container -->
+        <div id="messages" class="flex-grow overflow-y-auto mt-4 mb-2 flex flex-col space-y-2">
+            <!-- Chat messages will go here -->
+        </div>
+
+        <!-- Input Field with Send Button -->
+        <div class="flex mt-2">
+            <input id="chatInput" type="text" placeholder="Type your message..." class="flex-grow p-2 border rounded-l dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+            <button id="sendMessage" class="bg-secondary-ascent text-white px-4 py-2 rounded-r">Send</button>
+        </div>
+    </div>
+</div>
 <!-- Courses Section -->
 <div class="mt-8 max-w-7xl mx-auto p-6">
     <h1 class="text-2xl font-semibold">Introduction to C++</h1>
-        <video class="h-full w-full rounded-lg" controls>
-      <source
-        src="static/video/final_video (2).mp4"
-        type="video/mp4"
-      />
-      Your browser does not support the video tag.
+    <video class="h-full w-full rounded-lg" controls>
+        <source src="static/video/final_video (2).mp4" type="video/mp4" />
+        Your browser does not support the video tag.
     </video>
+</div>
 
-    </div>
+<div class="fixed bottom-6 right-6">
+    <button id="chatbotButton" class="bg-secondary-background hover:bg-secondary-ascent text-white font-bold py-2 px-4 rounded-full">
+        Chat with us
+    </button>
 </div>
 
 <script>
-    document.getElementById('profileButton').onclick = function() {
-        var dropdown = document.getElementById('profileDropdown');
-        dropdown.classList.toggle('hidden');
+    document.getElementById('chatbotButton').onclick = function() {
+        var chatbox = document.getElementById('chatbox');
+        chatbox.classList.toggle('hidden');
+
+        // Pause the video when the chatbox is opened
+        var video = document.querySelector('video');
+        if (!chatbox.classList.contains('hidden')) {
+            video.pause();
+        }
+    };
+
+    // Close chatbox
+    document.getElementById('closeChatbot').onclick = function() {
+        var chatbox = document.getElementById('chatbox');
+        chatbox.classList.add('hidden');
+    };
+
+    // Sending message logic with color and alignment styling
+    document.getElementById('sendMessage').onclick = function() {
+        var message = document.getElementById('chatInput').value;
+        if (message.trim() !== '') {
+            var messageContainer = document.getElementById('messages');
+
+            // User message (left-aligned, white background, purple border, purple text, rounded)
+            var userMessage = document.createElement('div');
+            userMessage.className = 'border-2 border-purple-500 text-purple-500 bg-white p-2 rounded-lg w-max self-start';
+            userMessage.textContent = message;
+            messageContainer.appendChild(userMessage);
+
+            // Scroll to the bottom
+            messageContainer.scrollTop = messageContainer.scrollHeight;
+
+            // Clear input field
+            document.getElementById('chatInput').value = '';
+
+            // Simulate a chatbot response
+            setTimeout(function() {
+                var botMessage = document.createElement('div');
+                botMessage.className = 'bg-purple-500 text-white p-2 rounded-lg w-max self-end';
+                botMessage.textContent = "This is a bot response.";  // Example response
+                messageContainer.appendChild(botMessage);
+
+                // Scroll to the bottom
+                messageContainer.scrollTop = messageContainer.scrollHeight;
+            }, 500);  // Simulated delay for bot response
+        }
     };
 </script>
 </body>
