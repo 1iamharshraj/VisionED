@@ -2,7 +2,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import CreateView, FormView
+from django.views.generic import CreateView, FormView,TemplateView
 
 from django.http import JsonResponse
 from home.forms import LoginForm, SignUpForm, EducatorUploadForm
@@ -17,8 +17,8 @@ import google.generativeai as genai
 import requests
 import os
 from PyPDF2 import PdfReader
-import chromadb
-import chromadb.utils.embedding_functions as embedding_functions
+# import chromadb
+# import chromadb.utils.embedding_functions as embedding_functions
 class StudentVidView(View):
     def get(self, request, video_id):
         # URL for the Node.js server, fetching the video based on video_id
@@ -98,6 +98,28 @@ class LogoutView(View):
         return redirect('home')
 
 class SignUpView(CreateView):
+    form_class = SignUpForm
+    template_name = 'users/register.html'  # You can reuse this for different account types
+    success_url = ''  # Redirect based on account type if necessary
+
+    def form_valid(self, form):
+        # Create the user and log them in
+        user = form.save()
+        login(self.request, user)
+
+        # Redirect based on the account type
+        if user.account_type == 'admin':
+            return redirect('admin_home')
+        elif user.account_type == 'student':
+            return redirect('stu_home')
+        elif user.account_type == 'educator':
+            return redirect('edu_home')
+        else:
+            return redirect(self.success_url)
+
+
+
+class SignUpView1(CreateView):
     form_class = SignUpForm
     template_name = 'users/register.html'  # You can reuse this for different account types
     success_url = ''  # Redirect based on account type if necessary
