@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'compressor',
     'django_celery_results',
+    'django_celery_beat'
 ]
 
 MIDDLEWARE = [
@@ -149,3 +150,5 @@ CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_BACKEND = 'django-db'  # Store Celery results in the database
 CELERY_CACHE_BACKEND = 'default'
+
+FASTAPI_VIDEO_GENERATION_URL = " http://127.0.0.1:8001/deepfake/"
