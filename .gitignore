@@ -20,5 +20,9 @@ package-lock
 static/css/output.css
 output.css
 
-#
-GenrationServer
+
+*/genratedvideo/*
+*/outputaudio/*
+*/images/*
+GenrationServer/vox-256.yaml
+GenrationServer/vox-adv-cpk.pth.tar
