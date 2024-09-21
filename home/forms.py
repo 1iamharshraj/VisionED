@@ -85,7 +85,7 @@ class EducatorUploadForm(forms.ModelForm):
     }))
 
     ppt_file = forms.FileField(widget=forms.ClearableFileInput(attrs={
-        'class': 'bg-background text-white border-none py-2 px-4 rounded cursor-pointer',
+        'class': 'custom-file-upload custome-submit-button',
     }))
 
     image = forms.ImageField(required=False, widget=forms.ClearableFileInput(attrs={
