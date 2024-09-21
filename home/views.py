@@ -2,7 +2,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import CreateView, FormView,TemplateView
+from django.views.generic import CreateView, FormView, TemplateView
 
 from django.http import JsonResponse
 from home.forms import LoginForm, SignUpForm, EducatorUploadForm
@@ -11,7 +11,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.views import View
 from .forms import LoginForm
-from .models import EducatorUpload,WatchedCourse
+from .models import EducatorUpload, WatchedCourse
 
 import google.generativeai as genai
 import requests
@@ -35,6 +35,11 @@ class StudentVidView(View):
         #     # Handle errors, such as connection issues
         #     print(f"Error fetching video data: {e}")
         #     video_data = None
+
+        video_data = node_server_url
+
+        # Render the template and pass the video data
+        return render(request, "students/StuVidPlayer.html", {'video_data': video_data})
 
 class EducatorCourseView(View):
     def get(self, request):
@@ -148,7 +153,7 @@ class EducatorHomeView(CreateView):
     model = EducatorUpload
     form_class = EducatorUploadForm
     template_name = 'educator/educatorhome.html'
-    success_url = '/educator_home/'
+    success_url = '/edu_home/'
 
     def form_valid(self, form):
         # Set the educator field to the current user
@@ -260,6 +265,6 @@ def chatbot_response(request):
         escaped_context = build_escaped_context(context)
         answer = generate_answer_from_gemini(f"{message}")
         response = answer.text
-        response = "This is a response to: "
+        #response = "This is a response to: "
         return JsonResponse({'response': response})
 

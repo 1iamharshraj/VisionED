@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
-    'compressor'
+    'compressor',
+    'django_celery_results',
 ]
 
 MIDDLEWARE = [
@@ -142,7 +143,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'home.CustomUser'  # Replace 'home' with the app name if it's different
 
-# Multithreading
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
+# CELERY settings
+CELERY_BROKER_URL = 'amqp://localhost'  # RabbitMQ broker URL
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_BACKEND = 'django-db'  # Store Celery results in the database
+CELERY_CACHE_BACKEND = 'default'
