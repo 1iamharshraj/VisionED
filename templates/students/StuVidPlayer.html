@@ -124,7 +124,7 @@
 
                 // User message (left-aligned, white background, purple border, purple text, rounded)
                 var userMessage = document.createElement('div');
-                userMessage.className = 'border-2 border-purple-500 text-purple-500 bg-white p-2 rounded-lg w-max self-start';
+                userMessage.className = 'bg-purple-500 text-white p-2 rounded-lg w-max self-end';
                 userMessage.textContent = message;
                 messageContainer.appendChild(userMessage);
 
@@ -147,7 +147,7 @@
             .then(data => {
                 // Display the chatbot's response
                 var botMessage = document.createElement('div');
-                botMessage.className = 'bg-purple-500 text-white p-2 rounded-lg w-max self-end';
+                botMessage.className = 'border-2 border-purple-500 text-purple-500 bg-white p-2 rounded-lg w-max self-start';
                 botMessage.textContent = data.response;  // Use the response from the backend
                 messageContainer.appendChild(botMessage);
 
