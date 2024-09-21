@@ -186,13 +186,15 @@ class EducatorHomeView(CreateView):
         context = super().get_context_data(**kwargs)
         # Fetch all courses uploaded by the current educator
         context['educator_uploads'] = EducatorUpload.objects.filter(educator=self.request.user)
+        context['first_name'] = self.request.user.first_name
+        context['last_name'] = self.request.user.last_name
         return context
 
 
 
 
 def chatbot_response(request):
-    # here
+    # here comment
 
     if request.method == 'POST':
         message = request.POST.get('message')
