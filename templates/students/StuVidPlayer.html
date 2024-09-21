@@ -31,11 +31,6 @@
                 <a href="stu_home" class="hover:text-secondary-ascent">Home</a>
                 <a href="stu_course" class="border-b-2 border-secondary-ascent">Courses</a>
             </div>
-                <!-- Navigation Links -->
-                <div class="hidden md:flex md:items-center md:space-x-8 mx-auto">
-                    <a href="#" class="hover:text-secondary-ascent">Home</a>
-                    <a href="#" class="border-b-2 border-secondary-ascent">Courses</a>
-                </div>
 
                 <!-- Profile Dropdown -->
                 <div class="relative flex-shrink-0">
@@ -45,23 +40,19 @@
                     </button>
                     <div id="profileDropdown"
                         class="absolute right-0 z-10 hidden bg-secondary-background shadow-lg dark:bg-gray-900 mt-2 rounded-md w-48">
-                        <a href="#" class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">My
-                            Account</a>
-                        <a href="#"
-                            class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">Settings</a>
-                        <a href="login"
-                            class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">Logout</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">My Account</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">Settings</a>
+                        <a href="login" class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">Logout</a>
                     </div>
                 </div>
             </div>
         </div>
     </nav>
 
-
-
     <!-- Chat Interface -->
     <div id="chatbox"
-        class="hidden fixed bottom-16 right-6 w-96 h-96 bg-secondary-background text-black dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg shadow-lg p-4">
+        class="hidden fixed bottom-16 right-14 w-[300px] h-[300px] bg-secondary-background text-black dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg shadow-lg p-4"
+        style="z-index: 1000;"> <!-- Adjusted size and moved to the left -->
         <div class="flex flex-col h-full">
             <!-- Chatbox Header -->
             <div class="flex items-center justify-between pb-2 border-b dark:border-gray-600">
@@ -82,6 +73,7 @@
             </div>
         </div>
     </div>
+
     <!-- Courses Section -->
     <div class="mt-8 max-w-7xl mx-auto p-6">
         <h1 class="text-2xl font-semibold">Introduction to C++ </h1>
