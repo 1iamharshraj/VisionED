@@ -11,7 +11,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.views import View
 from .forms import LoginForm
-from .models import EducatorUpload
+from .models import EducatorUpload,WatchedCourse
 
 import google.generativeai as genai
 import requests
