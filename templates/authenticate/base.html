@@ -13,38 +13,39 @@
   <link rel="stylesheet" href="{% static 'css/output.css' %}">
   {% endcompress %}
 
-  <title>Hello, world!</title>
+  <title>Login In</title>
 </head>
 
-<body class="absolute inset-0 bg-black">
+<body class="bg-black relative min-h-screenk">
 
-  <div class="absolute inset-0 bg-[url('/static/img/MainBackground.jpg')] bg-cover bg-center"></div>
+  <!-- Full-screen background image -->
+  <div class="absolute inset-0 bg-[url('/static/img/MAINLOGO.jpg')] bg-cover bg-center"></div>
 
-  <div class="flex justify-end items-center h-screen">
-    <div class="container" style="width: 450px; height: 587px;">
-      <div class="bg-white p-8 rounded-lg shadow-lg" style="height: 100%;">
-        {% if messages %}
-        {% for message in messages %}
-        <div class="alert alert-warning alert-dismissable" role="alert">
-          <button class="close btn btn-success" data-dismiss="alert">
-            <small><sup>x</sup></small>
-          </button>
-          {{ message }}
-        </div>
-        {% endfor %}
-        {% endif %}
-
-        {% block content %}
-        <!-- Your login form or content goes here -->
-        {% endblock %}
+  <!-- Sticky Navigation -->
+  <nav class="fixed top-0 left-0 w-full z-20 ">
+    <div class="container mx-auto flex items-center justify-between p-4">
+      <!-- Logo -->
+      <a href="#" class="flex items-center">
+        <!-- Replace with your image or SVG logo -->
+        <img src="{% static 'img/VisionEdLOGO.png' %}" class="object-contain w-[100px] h-[100px]" alt="Logo">
+        <!-- Adjust height as needed -->
+        <span class="text-primary-ascent  text-[30px] arima-500">VisionEd</span>
+      </a>
+      <!-- Right Side (optional for adding links) -->
+      <div>
+        <!-- You can add navigation links here if needed -->
       </div>
+    </div>
+  </nav>
+
+  <!-- Content container, positioned above the background image -->
+  <div class="relative z-10 text-white pt-16"> <!-- Added pt-16 to give space for the sticky nav -->
+    <div class="container py-10">
+      {% block content %}
+      {% endblock %}
     </div>
   </div>
 
-  <!-- Optional JavaScript -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
 </body>
 

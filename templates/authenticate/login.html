@@ -1,18 +1,76 @@
 {% extends 'authenticate/base.html' %}
 
 {% block content %}
+
+
+<section class="mt-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <!-- Left Column: Text -->
+        <div class="p-4 ml-5">
+            <p class="text-[4rem] arima-300 text-text-color ml-10">Revolutionize</p>
+
+            <!-- Flex container to align Learning and With next to each other -->
+            <div class="flex items-center ml-7">
+                <p class="text-[4rem] arima-500 text-text-color">Learning</p>
+                <p
+                    class="w-[100px] h-[100px] arima-500 flex items-center justify-center text-[2rem] border-2 border-pure-white text-pure-white rounded-[20%] ml-4">
+                    With
+                </p>
+            </div>
+
+            <p class="text-[4rem] text-primary-ascent arima-500 ml-6">AI Driven</p>
+            <p class="text-[4rem] text-text-color arima-500 ml-9">Education</p>
+            <p class="mb-4"></p>
+        </div>
+        <!-- Login Form  -->
+        <div
+            class="p-4 bg-background bg-opacity-50 backdrop-blur-md ml-5 min-w-[250px] min-h-[500px] flex flex-col justify-center items-center space-y-4">
+            <h2 class="text-xl font-bold mb-4 arima-500 text-[40px] text-center text-text-color">Log In</h2>
+            <form method="post" class="text-text-color">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="{{ form.username.id_for_label }}" class="block text-sm font-medium text-white">
+                        {{ form.username.label_tag }}
+                    </label>
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                    <p class="text-red-500 text-sm">{{ form.username.errors }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- Password -->
+                <div class="mb-3">
+                    <label for="{{ form.password.id_for_label }}" class="block text-sm font-medium text-white">
+                        {{ form.password.label_tag }}
+                    </label>
+                    {{ form.password }}
+                    {% if form.password.errors %}
+                    <p class="text-red-500 text-sm">{{ form.password.errors }}</p>
+                    {% endif %}
+                </div>
+
+                <button type="submit"
+                    class="w-full bg-primary-ascent text-pure-white font-bold py-2 rounded-md hover:bg-blue-500 arima-300">Log
+                    In</button>
+
+                <div>
+                    <p class="font-[16px] text-text-color arima-300">Not a Member <a href="register"
+                            class="text-primary-ascent font-[16px] arima-300">Sign Up</a></p>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</section>
+
 <div class="relative h-screen flex items-center justify-center">
     <!-- Black background -->
     <div class="absolute inset-0 bg-black opacity-50"></div>
 
     <!-- Form Container -->
-    <div class="bg-white shadow-lg rounded-lg p-6 w-full max-w-md z-10">
-        <h2 class="text-xl font-bold mb-4 text-center text-text-color">Log In</h2>
-        <form method="post" class="text-text-color">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="w-full bg-blue-600 text-white font-bold py-2 rounded-md hover:bg-blue-500">Log In</button>
-        </form>
+    <div class="bg-background shadow-lg rounded-lg p-6 w-full max-w-md z-10">
+
     </div>
 </div>
 {% endblock %}
