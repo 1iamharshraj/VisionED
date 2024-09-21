@@ -3,9 +3,8 @@
 {% block title %}Educator Home{% endblock %}
 
 {% block content %}
-<h2 class="text-3xl font-bold mb-4 arima-5 p-6">Create Course</h2>
-
-<section class="p-5 m-5 grid md:grid-cols-3 gap-6">
+<h2 class="text-3xl font-bold mb-4 arima-5 p-6 ml-5 mr-5">Create Course</h2>
+<section class="p-6 ml-5 mr-5 mt-2 grid md:grid-cols-3 gap-6">
     <!-- Column 1: Form (now spans 2 columns) -->
     <div class="md:col-span-2 bg-secondary-background p-4">
         <form method="POST" enctype="multipart/form-data" class="bg-secondary-background p-5 space-y-6">
@@ -69,7 +68,7 @@
             </div>
 
             <div class="flex justify-end mt-6">
-                <button type="submit"
+                <button type="submit" id="upload-id-btn"
                     class="bg-primary-ascent text-white px-4 py-2 w-3/6 rounded hover:bg-secondary-ascent">
                     Create Course
                 </button>
@@ -80,17 +79,104 @@
     <!-- Column 2: Preview Content (now spans 1 column) -->
     <div class="md:col-span-1 bg-secondary-background p-5 space-y-6">
         <div class="flex flex-col items-center p-5">
-            <img src="{% static 'img/ImageVector-removebg-preview.png' %}" alt="Description"
+            <!-- Image Preview -->
+            <img id="imagePreview" src="{% static 'img/ImageVector-removebg-preview.png' %}" alt="Description"
                 class="w-[80%] h-auto mb-4" />
-            <div class="flex justify-between w-full">
-                <h2 class="text-lg font-bold arima-500 text-[14px] text-text-color">Title</h2>
-                <span class="text-text-color arima-500 text-[16px] text-sm">00:00:00</span>
+            <div class="flex flex-col w-full mb-2">
+                <!-- Title Display -->
+                <h2 id="textPreview" class="text-lg font-bold arima-500 text-[14px] text-text-color mb-2">Title</h2>
+
+                <!-- Timestamp Display -->
+                <span class="text-text-color arima-500 text-[16px] text-sm mb-2">00:00:00</span>
+
+                <!-- PPT Name Display -->
+                <p id="pptnamePreview" class="text-gray-500"></p>
+
+                <!-- Educator name display  -->
+                <p id="ed_name" class="arima-500 text-text-color">Taught by
+                    {{first_name}} {{last_name}} </p>
             </div>
-            <button type="text" href=""
-                class="bg-primary-ascent text-white px-4 py-2 w-3/4 rounded hover:bg-secondary-ascent">
+
+            <button type="text" href="" id="watch-btn"
+                class="bg-primary-ascent text-white px-4 py-2 w-3/4 rounded hover:bg-secondary-ascent hidden">
                 Watch Video
             </button>
         </div>
     </div>
+
+    <!-- Loading Animation (hidden initially) -->
+    <div id="loading" class="hidden">
+        <img src="{% static 'img/home.gif' %}" alt="Loading..." />
+    </div>
+
 </section>
+
+
+
+<script>
+
+
+    // Preview panel population
+    document.addEventListener('DOMContentLoaded', function () {
+        const imageInput = document.getElementById('id_image');
+        const textInput = document.getElementById('id_title');
+        const imagePreview = document.getElementById('imagePreview');
+        const textPreview = document.getElementById('textPreview');
+        const pptInput = document.getElementById('id_ppt_file');
+        const pptNamePreview = document.getElementById('pptnamePreview');
+
+        // Handle image upload
+        imageInput.addEventListener('change', function () {
+            const file = imageInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    imagePreview.src = e.target.result;  // Set the preview image to the uploaded file
+                };
+                reader.readAsDataURL(file);  // Read the file as a data URL
+            }
+        });
+
+        // Handle PPT upload
+        pptInput.addEventListener('change', function () {
+            const pptFile = pptInput.files[0];
+            if (pptFile) {
+                pptNamePreview.textContent = pptFile.name;  // Display the name of the PPT file
+            } else {
+                pptNamePreview.textContent = '';  // Clear the name if no file is selected
+            }
+        });
+
+        // Handle title change
+        textInput.addEventListener('input', function () {
+            const titleText = textInput.value;
+            textPreview.textContent = titleText;  // Display the title in the preview
+        });
+    });
+
+
+
+    // LOADING on clicking create button
+    document.addEventListener('DOMContentLoaded', function () {
+        const uploadButton = document.getElementById('upload-id-btn');
+        const loadingDiv = document.getElementById('loading');
+        const watchButton = document.getElementById('watch-btn');
+
+        uploadButton.addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Show loading animation
+            loadingDiv.classList.remove('hidden');
+            watchButton.classList.add('hidden');
+
+            // Simulate a delay for video generation (replace with actual logic)
+            setTimeout(function () {
+                loadingDiv.classList.add('hidden');
+                watchButton.classList.remove('hidden');
+            }, 60000); // 1 minute delay (60000 ms)
+        });
+    });
+
+
+</script>
 {% endblock %}

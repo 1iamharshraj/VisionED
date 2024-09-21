@@ -45,24 +45,94 @@
 
   .custom-file-upload {
     background-color: #191919;  /* Black background */
-    color: white;            /* White text */
-    border: none;            /* No border */
-    padding: 8px 16px;       /* Padding for button feel */
-    border-radius: 4px;      /* Slightly rounded corners */
-    cursor: pointer;         /* Pointer on hover */
-    margin-bottom: 16px;     /* Adds space between buttons */
+    color: white;               /* White text */
+    border: none;               /* No border */
+    padding: 8px 16px;          /* Padding for button feel */
+    border-radius: 4px;         /* Slightly rounded corners */
+    cursor: pointer;            /* Pointer on hover */
+    margin-bottom: 16px;        /* Adds space between buttons */
 }
 
 .custom-submit-button {
     background-color: #191919; /* Black background */
-    color: white;            /* White text */
-    border: none;            /* No border */
-    padding: 8px 16px;       /* Padding for button feel */
-    border-radius: 4px;      /* Rounded corners */
-    cursor: pointer;         /* Pointer on hover */
+    color: white;              /* White text */
+    border: none;              /* No border */
+    padding: 8px 16px;         /* Padding for button feel */
+    border-radius: 4px;        /* Rounded corners */
+    cursor: pointer;           /* Pointer on hover */
 }
 
+/* Darken buttons on hover */
 .custom-submit-button:hover,
 .custom-file-upload:hover {
-    background-color: #222;  /* Darken on hover */
+    background-color: #222;    /* Darken on hover */
+}
+
+/* Target buttons under input fields */
+input ~ .custom-submit-button,
+input ~ .custom-file-upload,
+.custom-file-upload ~ .custom-submit-button {
+    display: none;              /* Hide by default */
+}
+
+input:focus ~ .custom-submit-button,
+input:focus ~ .custom-file-upload,
+.custom-file-upload:focus ~ .custom-submit-button {
+    display: block;             /* Show when input is focused */
+    background-color: #222;    /* Ensure dark appearance */
+}
+
+
+
+
+/* Hide the default file input */
+.custom-file-upload input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0; /* Make it invisible */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+.custom-file-upload > button {
+  background-color: #191919;  /* Black background for the button */
+  color: white;               /* White text */
+  border: none;               /* No border */
+  padding: 8px 16px;         /* Padding for button feel */
+  border-radius: 4px;        /* Slightly rounded corners */
+  cursor: pointer;            /* Pointer on hover */
+  margin-bottom: 16px;       /* Adds space between buttons */
+}
+
+.custom-file-upload > button:hover {
+  background-color: #222;     /* Darken on hover */
+}
+
+#id_image {
+  background-color:#191919;
+  display:none;
+}
+
+#id_ppt_file {
+  display:none;
+}
+
+
+
+@keyframes hover-animation {
+  0% {
+      opacity: 1;
+  }
+  50% {
+      opacity: 0.7;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+
+#watch-btn:hover {
+  animation: hover-animation 0.3s infinite;
 }

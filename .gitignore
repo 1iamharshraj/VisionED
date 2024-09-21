@@ -10,7 +10,8 @@ package-lock
 */__pycache__/*
 */migrations/__pycache__/
 */video/*
-
+media/uploads/img/*
+media/uploads/ppt/*
 # Build artifacts
 /build
 /dist

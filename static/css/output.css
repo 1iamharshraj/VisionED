@@ -640,16 +640,16 @@ video {
   top: calc(100% - 100px);
 }
 
+.right-14 {
+  right: 3.5rem;
+}
+
 .z-10 {
   z-index: 10;
 }
 
 .z-20 {
   z-index: 20;
-}
-
-.m-5 {
-  margin: 1.25rem;
 }
 
 .mx-auto {
@@ -659,6 +659,10 @@ video {
 
 .mb-1 {
   margin-bottom: 0.25rem;
+}
+
+.mb-10 {
+  margin-bottom: 2.5rem;
 }
 
 .mb-2 {
@@ -705,6 +709,10 @@ video {
   margin-left: 2.25rem;
 }
 
+.mr-5 {
+  margin-right: 1.25rem;
+}
+
 .mt-0\.5 {
   margin-top: 0.125rem;
 }
@@ -729,12 +737,12 @@ video {
   margin-top: 0.75rem;
 }
 
-.mt-36 {
-  margin-top: 9rem;
-}
-
 .mt-4 {
   margin-top: 1rem;
+}
+
+.mt-44 {
+  margin-top: 11rem;
 }
 
 .mt-5 {
@@ -747,14 +755,6 @@ video {
 
 .mt-8 {
   margin-top: 2rem;
-}
-
-.mb-10 {
-  margin-bottom: 2.5rem;
-}
-
-.mt-44 {
-  margin-top: 11rem;
 }
 
 .line-clamp-3 {
@@ -802,8 +802,8 @@ video {
   height: 4rem;
 }
 
-.h-24 {
-  height: 6rem;
+.h-32 {
+  height: 8rem;
 }
 
 .h-40 {
@@ -846,8 +846,12 @@ video {
   height: 100vh;
 }
 
-.h-32 {
-  height: 8rem;
+.h-\[300px\] {
+  height: 300px;
+}
+
+.h-\[300px\] {
+  height: 300px;
 }
 
 .min-h-\[500px\] {
@@ -858,16 +862,16 @@ video {
   min-height: 100vh;
 }
 
-.w-24 {
-  width: 6rem;
-}
-
 .w-3\/4 {
   width: 75%;
 }
 
 .w-3\/6 {
   width: 50%;
+}
+
+.w-32 {
+  width: 8rem;
 }
 
 .w-48 {
@@ -911,8 +915,12 @@ video {
   width: max-content;
 }
 
-.w-32 {
-  width: 8rem;
+.w-\[300px\] {
+  width: 300px;
+}
+
+.w-\[300px\] {
+  width: 300px;
 }
 
 .min-w-\[250px\] {
@@ -1293,6 +1301,10 @@ video {
   font-size: 36px;
 }
 
+.text-\[40px\] {
+  font-size: 40px;
+}
+
 .text-\[4rem\] {
   font-size: 4rem;
 }
@@ -1315,10 +1327,6 @@ video {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
-}
-
-.text-\[40px\] {
-  font-size: 40px;
 }
 
 .font-\[16px\] {
@@ -1455,10 +1463,93 @@ video {
   /* Pointer on hover */
 }
 
+/* Darken buttons on hover */
+
 .custom-submit-button:hover,
 .custom-file-upload:hover {
   background-color: #222;
   /* Darken on hover */
+}
+
+/* Target buttons under input fields */
+
+input ~ .custom-submit-button,
+input ~ .custom-file-upload,
+.custom-file-upload ~ .custom-submit-button {
+  display: none;
+  /* Hide by default */
+}
+
+input:focus ~ .custom-submit-button,
+input:focus ~ .custom-file-upload,
+.custom-file-upload:focus ~ .custom-submit-button {
+  display: block;
+  /* Show when input is focused */
+  background-color: #222;
+  /* Ensure dark appearance */
+}
+
+/* Hide the default file input */
+
+.custom-file-upload input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  /* Make it invisible */
+  cursor: pointer;
+  /* Change cursor on hover */
+}
+
+.custom-file-upload > button {
+  background-color: #191919;
+  /* Black background for the button */
+  color: white;
+  /* White text */
+  border: none;
+  /* No border */
+  padding: 8px 16px;
+  /* Padding for button feel */
+  border-radius: 4px;
+  /* Slightly rounded corners */
+  cursor: pointer;
+  /* Pointer on hover */
+  margin-bottom: 16px;
+  /* Adds space between buttons */
+}
+
+.custom-file-upload > button:hover {
+  background-color: #222;
+  /* Darken on hover */
+}
+
+#id_image {
+  background-color:#191919;
+  display:none;
+}
+
+#id_ppt_file {
+  display:none;
+}
+
+@keyframes hover-animation {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+#watch-btn:hover {
+  animation: hover-animation 0.3s infinite;
 }
 
 .hover\:bg-primary-ascent:hover {

@@ -1,40 +1,43 @@
+import httpx
 from celery import shared_task
 import requests
-
 from VisionED import settings
-#from django.conf import settings
-from .models import EducatorUpload
+from .models import EducatorUpload, Video
 import logging
 
-# Set up logging
 logger = logging.getLogger(__name__)
 
 
-@shared_task
+#@shared_task
 def generate_video(educator_id):
     """
-    Task to generate video for the given educator.
-    This task calls a FastAPI endpoint to handle the video generation process.
+    Task to generate video for the given educator and save the video to the database.
     """
     try:
         # Fetch educator details based on educator_id
         educator_upload = EducatorUpload.objects.get(pk=educator_id)
-
+        print(educator_upload)
         # Prepare the data for the FastAPI call
         video_data = {
-            "video_path": educator_id,
-            "ppt_path": educator_upload.ppt_file.url,
-            "image_path": educator_upload.image.url ,
+            "video_url": str(educator_id),
+            "ppt_path": educator_upload.ppt_file.name,
+            "image_path": educator_upload.image.name,
         }
 
+        print(video_data)
         # Call the FastAPI endpoint to generate the video
-        fastapi_url = settings.FASTAPI_VIDEO_GENERATION_URL  # Define in Django settings
-        response = requests.post(fastapi_url, json=video_data)
+        fastapi_url = settings.FASTAPI_VIDEO_GENERATION_URL
+        print(fastapi_url)
+        response = httpx.post(
+            fastapi_url,
+            params=video_data,
+        )
 
+        print(response.status_code)
         # Check if the FastAPI call was successful
         if response.status_code == 200:
-            logger.info(f"Video successfully generated for educator_id: {educator_id}")
-            return f"Video generated successfully for educator_id: {educator_id}"
+            # Extract the video file URL or path from the response
+            return f"Video generated and saved for course_id: {educator_id}"
         else:
             logger.error(f"Failed to generate video for educator_id: {educator_id}, Response: {response.text}")
             return f"Error generating video for educator_id: {educator_id}"
