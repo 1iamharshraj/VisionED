@@ -1,28 +1,34 @@
+{% load compress %}
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Page</title>
-    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
-    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
+    <title>Student Profile</title>
+
+    <!-- Bootstrap CSS -->
+    {% compress css %}
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    {% endcompress %}
 </head>
 
-<body class="bg-secondary-background text-white dark:text-white">
+<body class="bg-secondary-background text-pure-white dark:text-white">
     <!-- Navigation Bar -->
-    <nav class="bg-secondary-background shadow-md dark:bg-gray-900">
+    <nav class="bg-secondary-background shadow-md dark:bg-gray-900  absolute top-0 w-full">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <!-- Logo -->
                 <div class="flex items-center justify-start">
-                    <img src="/static/img/logo.png" alt="Logo" class="h-10 w-auto">
+                    <img src="{% static 'img/logo.png' %}" alt="Logo" class="h-10 w-auto">
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden md:flex md:items-center md:space-x-8 mx-auto">
-                    <a href="#" class="border-b-2 border-secondary-ascent">Home</a>
-                    <a href="#" class="hover:text-secondary-ascent">Courses</a>
+                    <a href="stu_home" class="hover:text-secondary-ascent">Home</a>
+                    <a href="#" class="border-b-2 border-secondary-ascent">Courses</a>
                     <a href="#" class="hover:text-secondary-ascent">About</a>
                     <a href="#" class="hover:text-secondary-ascent">Contact Us</a>
                 </div>
@@ -33,113 +39,76 @@
                         <img src="https://via.placeholder.com/30" alt="Profile" class="rounded-full">
                         <span class="ml-2">Profile</span>
                     </button>
-                    <div id="profileDropdown" class="absolute right-0 z-10 hidden bg-secondary-background shadow-lg dark:bg-gray-900 mt-2 rounded-md w-48">
-                        <a href="#" class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">My Account</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">Settings</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">Logout</a>
+                    <div id="profileDropdown"
+                        class="absolute right-0 z-10 hidden bg-secondary-background shadow-lg dark:bg-gray-900 mt-2 rounded-md w-48">
+                        <a href="#" class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">My
+                            Account</a>
+                        <a href="#"
+                            class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">Settings</a>
+                        <a href="login"
+                            class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">Logout</a>
                     </div>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Profile Section -->
-    <main class="profile-page bg-background text-white dark:text-white">
-        <section class="relative block h-500-px bg-background">
-            <div class="absolute top-0 w-full h-full bg-center bg-cover" style="background-image: url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2710&amp;q=80');">
-                <span id="blackOverlay" class="w-full h-full absolute opacity-50 bg-black"></span>
+    <!-- Full-width gradient section -->
+    <!-- from-[#4A00E0] to-[#8E2DE2] -->
+    <section class="mt-16 relative w-full h-[200px] bg-gradient-to-r from-grad-r to-grad-l">
+        <!-- Content inside the gradient -->
+        <div class="flex justify-center items-center h-full">
+            <!-- Circle with image -->
+            <div
+                class="absolute top-[calc(100%-100px)] w-[200px] h-[200px] rounded-full overflow-hidden border-4 border-white shadow-lg">
+                <img src="{% static 'img/profile.jpg' %}" alt="Profile" class="w-full h-full object-cover">
             </div>
-            <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px" style="transform: translateZ(0px)">
-                <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" version="1.1" viewBox="0 0 2560 100" x="0" y="0">
-                    <polygon class="text-secondary-background fill-current" points="2560 0 2560 100 0 100"></polygon>
-                </svg>
-            </div>
-        </section>
+        </div>
 
-        <section class="relative py-16 bg-secondary-background text-white">
-            <div class="container mx-auto px-4">
-                <div class="relative flex flex-col min-w-0 break-words bg-secondary-background text-white w-full mb-6 shadow-xl rounded-lg -mt-64">
-                    <div class="px-6">
-                        <div class="flex flex-wrap justify-center">
-                            <div class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
-                                <div class="relative">
-                                    <img alt="..." src="https://demos.creative-tim.com/notus-js/assets/img/team-2-800x800.jpg" class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px">
-                                </div>
-                            </div>
-                            <div class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
-                                <div class="py-6 px-3 mt-32 sm:mt-0">
-                                    <button class="bg-primary-ascent text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150" type="button">
-                                        Connect
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="w-full lg:w-4/12 px-4 lg:order-1">
-                                <div class="flex justify-center py-4 lg:pt-4 pt-8">
-                                    <div class="mr-4 p-3 text-center">
-                                        <span class="text-xl font-bold block uppercase tracking-wide text-white">22</span><span class="text-sm text-secondary-ascent">Friends</span>
-                                    </div>
-                                    <div class="mr-4 p-3 text-center">
-                                        <span class="text-xl font-bold block uppercase tracking-wide text-white">10</span><span class="text-sm text-secondary-ascent">Photos</span>
-                                    </div>
-                                    <div class="lg:mr-4 p-3 text-center">
-                                        <span class="text-xl font-bold block uppercase tracking-wide text-white">89</span><span class="text-sm text-secondary-ascent">Comments</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center mt-12">
-                            <h3 class="text-4xl font-semibold leading-normal mb-2 text-white">
-                                Jenna Stones
-                            </h3>
-                            <div class="text-sm leading-normal mt-0 mb-2 text-secondary-ascent font-bold uppercase">
-                                <i class="fas fa-map-marker-alt mr-2 text-lg text-secondary-ascent"></i>
-                                Los Angeles, California
-                            </div>
-                            <div class="mb-2 text-secondary-ascent mt-10">
-                                <i class="fas fa-briefcase mr-2 text-lg text-secondary-ascent"></i>Solution Manager - Creative Tim Officer
-                            </div>
-                            <div class="mb-2 text-secondary-ascent">
-                                <i class="fas fa-university mr-2 text-lg text-secondary-ascent"></i>University of Computer Science
-                            </div>
-                        </div>
-                        <div class="mt-10 py-10 border-t border-secondary-background text-center">
-                            <div class="flex flex-wrap justify-center">
-                                <div class="w-full lg:w-9/12 px-4">
-                                    <p class="mb-4 text-lg leading-relaxed text-white">
-                                        An artist of considerable range, Jenna the name taken by
-                                        Melbourne-raised, Brooklyn-based Nick Murphy writes,
-                                        performs and records all of his own music, giving it a
-                                        warm, intimate feel with a solid groove structure. An
-                                        artist of considerable range.
-                                    </p>
-                                    <a href="#pablo" class="font-normal text-primary-ascent">Show more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <!-- User details section -->
+        <div class="flex justify-center items-center arima-400 mt-24">
+            <div class="grid grid-rows-2 text-right">
+                <!-- Username -->
+                <p class="text-pure-white text-2xl arima-400  font-bold">@jane12doe</p>
+                <!-- Profession -->
+                <p class="text-pure-white  arima-400 text-lg">Profession</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Empty section for further content -->
+    <section class="bg-background mt-36  min-w-[80%] h-auto  p-10 mb-5">
+        <p class="arima-400 text">Your Courses</p>
+        <!-- Grid layout for courses -->
+        <div class="grid grid-cols-2 gap-4">
+            <!-- Course 1 -->
+            <div class="flex items-center space-x-4 bg-white p-4 rounded-md shadow-md">
+                <img src="{% static 'img/course1.webp' %}" alt="Course 1" class="w-24 h-24 rounded-sm object-cover">
+                <p class="text-sm font-semibold text-gray-700">Course Name 1</p>
             </div>
 
-            <footer class="relative bg-secondary-background pt-8 pb-6 mt-8">
-                <div class="container mx-auto px-4">
-                    <div class="flex flex-wrap items-center md:justify-between justify-center">
-                        <div class="w-full md:w-6/12 px-4 mx-auto text-center">
-                            <div class="text-sm text-secondary-ascent font-semibold py-1">
-                                Made with <a href="https://www.creative-tim.com/product/notus-js" class="text-secondary-ascent hover:text-primary-ascent" target="_blank">Notus JS</a> by <a href="https://www.creative-tim.com" class="text-secondary-ascent hover:text-primary-ascent" target="_blank"> Creative Tim</a>.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-        </section>
-    </main>
+            <!-- Course 2 -->
+            <div class="flex items-center space-x-4 bg-white p-4 rounded-md shadow-md">
+                <img src="{% static 'img/course2.webp' %}" alt="Course 2" class="w-24 h-24 rounded-sm object-cover">
+                <p class="text-sm font-semibold text-gray-700">Course Name 2</p>
+            </div>
+
+            <div class="flex items-center space-x-4 bg-white p-4 rounded-md shadow-md">
+                <img src="{% static 'img/course3.webp' %}" alt="Course 2" class="w-24 h-24 rounded-sm object-cover">
+                <p class="text-sm font-semibold text-gray-700">Course Name 3</p>
+            </div>
+        </div>
+    </section>
+
 
     <script>
-        document.getElementById('profileButton').addEventListener('click', function () {
+        document.getElementById('profileButton').onclick = function () {
             var dropdown = document.getElementById('profileDropdown');
             dropdown.classList.toggle('hidden');
-        });
+        };
     </script>
+
 </body>
 
 </html>

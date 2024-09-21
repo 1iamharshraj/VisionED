@@ -18,7 +18,9 @@ module.exports = {
       'gray-dark': '#273444',
       'gray': '#8492a6',
       'gray-light': '#d3dce6',
-      'pure-white': "#FFFFFF"
+      'pure-white': "#FFFFFF",
+      "grad-r": "#c06c84",
+      "grad-l": "#355C7D"
     },
     extend: {
       fontSize: {

@@ -14,6 +14,6 @@ urlpatterns = [
     path('chatbot/', views.chatbot_response, name='chatbot_response'),
     path("stu_course",views.StudentCourseView.as_view(),name='stu_course'),
     path("stu_vid/<int:video_id>/", views.StudentVidView.as_view(), name='stu_vid'),
-    path("stu_prof", views.ProfileView.as_view(), name='stu_prof'),
+    path("stu_prof", views.StudentProfileView.as_view(), name='stu_prof'),
 
 ]
