@@ -57,6 +57,17 @@ class StudentHomeView(TemplateView):
         context['recently_watched_courses'] = WatchedCourse.objects.filter(student=self.request.user).order_by('-watched_at')[:5]  # Last 5 watched courses
         return context
 
+
+class  EducatorProfileView(TemplateView):
+    template_name='educator/Profile.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Get the recent watched courses for the logged-in student
+        context['educatorname'] = self.request.user.first_name
+        context['username'] = self.request.user.username
+        context['accounttype'] = self.request.user.account_type.capitalize()
+        return context
+
 class StudentCourseView(View):
     def get(self, request):
         return render(request,"students/StuCourses.html")
