@@ -850,6 +850,10 @@ video {
   height: 300px;
 }
 
+.h-\[300px\] {
+  height: 300px;
+}
+
 .min-h-\[500px\] {
   min-height: 500px;
 }
@@ -909,6 +913,10 @@ video {
 .w-max {
   width: -moz-max-content;
   width: max-content;
+}
+
+.w-\[300px\] {
+  width: 300px;
 }
 
 .w-\[300px\] {

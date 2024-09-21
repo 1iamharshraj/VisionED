@@ -27,18 +27,6 @@ class StudentVidView(View):
         # URL for the Node.js server, fetching the video based on video_id
         node_server_url = f"http://localhost:3000/{video_id}.mp4"
 
-        # try:
-        #     # Make a request to the Node.js server to get the video details
-        #     response = requests.get(node_server_url, stream=True)
-        #     response.raise_for_status()  # Raise an exception for HTTP errors
-        #
-        #     # If you just want to get the URL for the video, you can directly return it to the template.
-        #     video_data = node_server_url
-        # except requests.exceptions.RequestException as e:
-        #     # Handle errors, such as connection issues
-        #     print(f"Error fetching video data: {e}")
-        #     video_data = None
-
         video_data = node_server_url
 
         # Render the template and pass the video data
@@ -180,9 +168,11 @@ class EducatorHomeView(CreateView):
         # Set the educator field to the current user
         form.instance.educator = self.request.user
         educator_upload_instance = form.save()
-
+        print(1)
         # Trigger Celery task for video generation
-        generate_video.delay(educator_upload_instance.id)
+        #generate_video.delay(educator_upload_instance.id)
+        generate_video(educator_upload_instance.id)
+        print(4)
 
         print(form.cleaned_data)  # Debugging line
         return super().form_valid(form)

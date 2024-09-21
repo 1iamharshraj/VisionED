@@ -145,10 +145,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'home.CustomUser'  # Replace 'home' with the app name if it's different
 
 # CELERY settings
-CELERY_BROKER_URL = 'amqp://localhost'  # RabbitMQ broker URL
+CELERY_BROKER_URL = 'amqp://127.0.0.1'  # RabbitMQ broker URL
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_BACKEND = 'django-db'  # Store Celery results in the database
 CELERY_CACHE_BACKEND = 'default'
 
-FASTAPI_VIDEO_GENERATION_URL = " http://127.0.0.1:8001/deepfake/"
+FASTAPI_VIDEO_GENERATION_URL = "http://127.0.0.1:8080/deepfake/"
