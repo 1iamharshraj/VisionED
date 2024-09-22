@@ -50,7 +50,7 @@ class StudentHomeView(TemplateView):
         context = super().get_context_data(**kwargs)
         # Get the recent watched courses for the logged-in student
         context['studentname'] = self.request.user.first_name
-        context['recently_watched_courses'] = WatchedCourse.objects.filter(student=self.request.user).order_by('-watched_at')[:3]  # Last 5 watched courses
+        context['recently_watched_courses'] = WatchedCourse.objects.filter(student=self.request.user).order_by('-watched_at')[:3]  # Last 3 watched courses
         return context
 
 
@@ -68,7 +68,7 @@ class StudentCourseView(TemplateView):
     template_name = "students/StuCourses.html"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["courses"] = EducatorUpload.objects.order_by('-created_at')[:3]
+        context["courses"] = EducatorUpload.objects.order_by('-created_at')[:6]
         return context
 
 
