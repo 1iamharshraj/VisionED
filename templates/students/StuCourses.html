@@ -60,9 +60,10 @@
         <!-- Course Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
             <!-- Course Card 1 -->
-            <article
+            {% for course in courses %}
+                <article
                 class="rounded-lg border border-[#3F4273] bg-transparent p-4 shadow-sm transition hover:shadow-lg flex justify-between items-center">
-                <div href="stu_vid/20240921/">
+                <div href="stu_vid/{{course.id}}">
                     <span class="inline-block rounded bg-blue-600 p-2 text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -70,63 +71,20 @@
                         </svg>
                     </span>
 
-                    <a href="stu_vid/20240921/">
-                        <h3 class="mt-0.5 text-lg font-medium text-white">Course Title 1</h3>
+                    <a href="stu_vid/{{course.id}}">
+                        <h3 class="mt-0.5 text-lg font-medium text-white">{{ course.title }}</h3>
                     </a>
 
-                    <p class="mt-2 text-sm text-white">This is a brief description of the course content.</p>
+                    <p class="mt-2 text-sm text-white">{{ course.description }}</p>
                 </div>
 
-                <a href="stu_vid/20240921/" class="ml-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                <a href="stu_vid/{{course.id}}" class="ml-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
                     Enroll
                 </a>
             </article>
+            {% empty %}
 
-            <!-- Course Card 2 -->
-            <article
-                class="rounded-lg border border-[#3F4273] bg-transparent p-4 shadow-sm transition hover:shadow-lg flex justify-between items-center">
-                <div>
-                    <span class="inline-block rounded bg-blue-600 p-2 text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path d="M12 14l9-5-9-5-9 5z" />
-                        </svg>
-                    </span>
-
-                    <a href="#">
-                        <h3 class="mt-0.5 text-lg font-medium text-white">Course Title 2</h3>
-                    </a>
-
-                    <p class="mt-2 text-sm text-white">This is a brief description of the course content.</p>
-                </div>
-
-                <a href="#" class="ml-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-                    Enroll
-                </a>
-            </article>
-
-            <!-- Course Card 3 -->
-            <article
-                class="rounded-lg border border-[#3F4273] bg-transparent p-4 shadow-sm transition hover:shadow-lg flex justify-between items-center">
-                <div>
-                    <span class="inline-block rounded bg-blue-600 p-2 text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path d="M12 14l9-5-9-5-9 5z" />
-                        </svg>
-                    </span>
-
-                    <a href="#">
-                        <h3 class="mt-0.5 text-lg font-medium text-white">Course Title 3</h3>
-                    </a>
-
-                    <p class="mt-2 text-sm text-white">This is a brief description of the course content.</p>
-                </div>
-
-                <a href="#" class="ml-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-                    Enroll
-                </a>
-            </article>
+            {% endfor %}
         </div>
     </div>
 

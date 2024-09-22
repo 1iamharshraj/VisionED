@@ -26,11 +26,11 @@
                     <img src="/static/img/logo.png" alt="Logo" class="h-10 w-auto">
                 </div>
 
-                <!-- Navigation Links -->
-                <div class="hidden md:flex md:items-center md:space-x-8 mx-auto">
-                    <a href="stu_home" class="hover:text-secondary-ascent">Home</a>
-                    <a href="stu_course" class="border-b-2 border-secondary-ascent">Courses</a>
-                </div>
+            <!-- Navigation Links -->
+            <div class="hidden md:flex md:items-center md:space-x-8 mx-auto">
+                <a href="stu_home" class="hover:text-secondary-ascent">Home</a>
+                <a href="stu_course" class="border-b-2 border-secondary-ascent">Courses</a>
+            </div>
 
                 <!-- Profile Dropdown -->
                 <div class="relative flex-shrink-0">
@@ -40,13 +40,9 @@
                     </button>
                     <div id="profileDropdown"
                         class="absolute right-0 z-10 hidden bg-secondary-background shadow-lg dark:bg-gray-900 mt-2 rounded-md w-48">
-                        <a href="stu_prof"
-                            class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">My
-                            Account</a>
-                        <a href="#"
-                            class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">Settings</a>
-                        <a href="login"
-                            class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">Logout</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">My Account</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">Settings</a>
+                        <a href="login" class="block px-4 py-2 hover:bg-secondary-ascent dark:hover:bg-secondary-ascent">Logout</a>
                     </div>
                 </div>
             </div>
@@ -55,7 +51,7 @@
 
     <!-- Chat Interface -->
     <div id="chatbox"
-        class="hidden fixed bottom-16 right-14 w-[300px] h-[300px] bg-secondary-background text-black dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg shadow-lg p-4"
+        class="hidden fixed bottom-16 right-10 w-[30rem] h-[30rem] bg-secondary-background text-black dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg shadow-lg p-4"
         style="z-index: 1000;"> <!-- Adjusted size and moved to the left -->
         <div class="flex flex-col h-full">
             <!-- Chatbox Header -->
@@ -87,7 +83,7 @@
         </video>
     </div>
 
-    <div class="fixed bottom-6 right-6">
+    <div class="fixed bottom-6 right-10"> <!-- Also moved this button to match chatbox -->
         <button id="chatbotButton"
             class="bg-secondary-background hover:bg-secondary-ascent text-white font-bold py-2 px-4 rounded-full">
             Chat with us
@@ -139,20 +135,20 @@
                     },
                     body: JSON.stringify({ message: message })
                 })
-                    .then(response => response.json())
-                    .then(data => {
-                        // Display the chatbot's response
-                        var botMessage = document.createElement('div');
-                        botMessage.className = 'border-2 border-purple-500 text-purple-500 bg-white p-2 rounded-lg w-max self-start';
-                        botMessage.textContent = data.response;  // Use the response from the backend
-                        messageContainer.appendChild(botMessage);
+                .then(response => response.json())
+                .then(data => {
+                    // Display the chatbot's response
+                    var botMessage = document.createElement('div');
+                    botMessage.className = 'border-2 border-purple-500 text-purple-500 bg-white p-2 rounded-lg w-max self-start';
+                    botMessage.textContent = data.response;  // Use the response from the backend
+                    messageContainer.appendChild(botMessage);
 
-                        // Scroll to the bottom
-                        messageContainer.scrollTop = messageContainer.scrollHeight;
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
+                    // Scroll to the bottom
+                    messageContainer.scrollTop = messageContainer.scrollHeight;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
             }
         };
     </script>
