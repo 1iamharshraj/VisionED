@@ -106,14 +106,14 @@ Access the Django app at `http://localhost:8000`.
    Install the required GPU dependencies via conda:
 
    ```bash
-   conda env create -f conda-gpu_env.yaml
-   conda activate gpu_env
+   conda env create -f conda-gpuenv.yaml
+   conda activate gpuenv
    ```
 
 3. **Run the FastAPI Video Generation Service**:
 
    ```bash
-   uvicorn app:app --host 0.0.0.0 --port 8001
+   uvicorn app:app --host 127.0.0.1 --port 8080
    ```
 
 The FastAPI server will now be ready to process video generation requests.
@@ -196,7 +196,7 @@ This will compile your Tailwind CSS styles and watch for changes.
    
 2. **Background Video Generation**: Uploaded files are sent to the FastAPI service for video generation, which runs asynchronously.
 
-3. **Viewing Generated Videos**: Once the video is generated, educators can view or download the video from their dashboard, and students can stream the videos via the Node media server.
+3. **Viewing Generated Videos**: Once the video is generated,  students can stream the videos via the Node media server.
 
 ---
 
@@ -217,6 +217,3 @@ Please ensure that your code adheres to the project's coding standards and passe
 ## License
 
 This project is licensed under the MIT License. See the `LICENSE` file for more information.
-```
-
-This README provides a comprehensive overview of your project, including all necessary setup instructions and features. Feel free to adjust any sections as needed!
